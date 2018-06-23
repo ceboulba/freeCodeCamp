@@ -2,15 +2,12 @@ function whatIsInAName(collection, source) {
   // What's in a name?
   var arr = [];
   // Only change code below this line
-  const k = Object.keys(source);
+  const keys = Object.keys(source);
+  console.log('Keys: ', keys)
 
- collection.forEach(element => {
-   const test = k.map(key => element[key] ? true : false)
-   const taille = test.filter( x=> x === true ) 
-   test.length === taille.length ?
-   arr.push(element) :
-   console.log('no')
- });
+  collection.map(obj => {
+    console.log('obj : ', obj)
+  })
  
   // Only change code above this line
   console.log('arr: ', arr)
