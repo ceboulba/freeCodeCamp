@@ -2,23 +2,27 @@ function whatIsInAName(collection, source) {
   // What's in a name?
   var arr = [];
   // Only change code below this line
-
   const k = Object.keys(source);
-  console.log('k: ',k[0])
 
-collection.forEach(element => {
-  console.log('element: ',element[k[0]]);
-});
-
+ collection.forEach(element => {
+   const test = k.map(key => element[key] ? true : false)
+   const taille = test.filter( x=> x === true ) 
+   test.length === taille.length ?
+   arr.push(element) :
+   console.log('no')
+ });
+ 
   // Only change code above this line
+  console.log('arr: ', arr)
   return arr;
 }
 
+
 whatIsInAName(
   [
-    { first: "Romeo", last: "Montague" },
-    { first: "Mercutio", last: null },
-    { first: "Tybalt", last: "Capulet" }
-  ],
-  { last: "Capulet" }
-);
+    { "apple": 1, "bat": 2 }, 
+    { "bat": 2 }, 
+    { "apple": 1, "bat": 2, "cookie": 2 }
+  ]
+  , { "apple": 1, "bat": 2 })
+  
