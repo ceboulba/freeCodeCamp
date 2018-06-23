@@ -24,5 +24,10 @@ whatIsInAName(
     { "bat": 2 }, 
     { "apple": 1, "bat": 2, "cookie": 2 }
   ]
-  , { "apple": 1, "bat": 2 })
-  
+  , { "apple": 1, "bat": 2 });
+
+  whatIsInAName(
+    [
+      {"a": 1, "b": 2, "c": 3}
+    ]
+    , {"a": 1, "b": 9999, "c": 3}  );
