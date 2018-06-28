@@ -3,6 +3,23 @@ function checkCashRegister(price, cash, cid) {
   let monnaieARendre = cash - price; // monnaie à rendre 0.5
   // console.log('A rendre: ', monnaieARendre)
   var change;
+    
+    console.log(valor.PENNY)
+    console.log(valor.DIME)
+
+  const valors = {
+    "Penny" : 0.01,
+    "Nickel" : 0.05,
+    "Dime" : 0.1,
+    "Quarter" : 0.25,
+    "Dollar" : 1,
+    "fiveDollars" : 5,
+    "tenDollars" : 10,
+    "twentyDollars" : 20,
+    "oneHundredDollars" : 100
+  }
+
+
   // Here is your change, ma'am.
   return change;
 }
@@ -48,3 +65,16 @@ Twenty Dollars       $20 (TWENTY)
 One-hundred Dollars  $100 (ONE HUNDRED)
 
 */
+const valors = 
+{
+  "Penny" : 0.01,
+  "Nickel" : 0.05,
+  "Dime" : 0.1,
+  "Quarter" : 0.25,
+  "Dollar" : 1,
+  "fiveDollars" : 5,
+  "tenDollars" : 10,
+  "twentyDollars" : 20,
+  "oneHundredDollars" : 100
+}
+
