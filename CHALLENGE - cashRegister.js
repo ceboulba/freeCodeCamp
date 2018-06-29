@@ -1,43 +1,37 @@
 function checkCashRegister(price, cash, cid) {
-
   let monnaieARendre = cash - price; // monnaie à rendre 0.5
   // console.log('A rendre: ', monnaieARendre)
-  var change;
-    
-    console.log(valor.PENNY)
-    console.log(valor.DIME)
+  var change = [];
+  let monnaie = cash - price;
+  let caisse = cid;
 
   const valors = {
-    "Penny" : 0.01,
-    "Nickel" : 0.05,
-    "Dime" : 0.1,
-    "Quarter" : 0.25,
-    "Dollar" : 1,
-    "fiveDollars" : 5,
-    "tenDollars" : 10,
-    "twentyDollars" : 20,
-    "oneHundredDollars" : 100
-  }
+    penny: 0.01,
+    dime: 0.1,
+    quarter: 0.25,
+    dollar: 1,
+    fiveDollars: 5,
+    tenDollars: 10,
+    twentyDollars: 20,
+    oneHundredDollars: 100
+  };
 
-
-  // Here is your change, ma'am.
-  return change;
+  console.log('caisse: ',caisse)
 }
 
-// Example cash-in-drawer array:
-// [
-// ["PENNY", 1.01],
-// ["NICKEL", 2.05],
-// ["DIME", 3.1],
-// ["QUARTER", 4.25],
-// ["ONE", 90],
-// ["FIVE", 55],
-// ["TEN", 20],
-// ["TWENTY", 60],
-// ["ONE HUNDRED", 100]
-// ]
+//////////////////////////////////////////////////////////////
 
-checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+checkCashRegister(19.5, 20, [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+]);
 
 /*
 JavaScript Algorithms and Data Structures Projects: Cash Register
@@ -65,16 +59,14 @@ Twenty Dollars       $20 (TWENTY)
 One-hundred Dollars  $100 (ONE HUNDRED)
 
 */
-const valors = 
-{
-  "Penny" : 0.01,
-  "Nickel" : 0.05,
-  "Dime" : 0.1,
-  "Quarter" : 0.25,
-  "Dollar" : 1,
-  "fiveDollars" : 5,
-  "tenDollars" : 10,
-  "twentyDollars" : 20,
-  "oneHundredDollars" : 100
-}
-
+const valors = {
+  Penny: 0.01,
+  Nickel: 0.05,
+  Dime: 0.1,
+  Quarter: 0.25,
+  Dollar: 1,
+  fiveDollars: 5,
+  tenDollars: 10,
+  twentyDollars: 20,
+  oneHundredDollars: 100
+};
