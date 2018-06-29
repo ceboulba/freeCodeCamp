@@ -1,22 +1,19 @@
 function checkCashRegister(price, cash, cid) {
   let monnaieARendre = cash - price; // monnaie à rendre 0.5
   // console.log('A rendre: ', monnaieARendre)
-  var change = [];
-  let monnaie = cash - price;
-  let caisse = cid;
-
-  const valors = {
-    penny: 0.01,
-    dime: 0.1,
-    quarter: 0.25,
-    dollar: 1,
-    fiveDollars: 5,
-    tenDollars: 10,
-    twentyDollars: 20,
-    oneHundredDollars: 100
+  var change = {
+    status : 'OPEN',
+    change: [],
   };
+  
+  let monnaie = cash - price;  
+  const maCaisse = cid;
+  console.log(maCaisse[0][1])
+  
+  console.log('CID:',cid)
+  console.log('change:',change)
 
-  console.log('caisse: ',caisse)
+   return change;
 }
 
 //////////////////////////////////////////////////////////////
