@@ -30,7 +30,9 @@ function checkCashRegister(price, cash, cid) {
 
 //fonction rend()
   function rend(monnaie, val) {
-    console.log(`monaie = ${monnaie} et val = ${val}`)
+    while(monnaie>0){
+      console.log(`monaie = ${monnaie} et val = ${val}`)
+    }
   }
 
   console.log("CHANGE:", change);
