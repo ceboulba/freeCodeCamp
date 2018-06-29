@@ -1,23 +1,38 @@
 function checkCashRegister(price, cash, cid) {
-  let monnaie = cash - price; // monnaie à rendre 0.5
-  var change = {
-    status: "OPEN",
+
+  let monnaie = cash - price; // monnaie à rendre
+
+  const change = {
+    status: "",
     change: []
   };
 
-  let maCaisse = cid;
+  const valors = [
+    ["PENNY", 0.01],
+    ["NICKEL", 0.05],
+    ["DIME", 0.1],
+    ["QUARTER", 0.25],
+    ["ONE", 1],
+    ["FIVE", 5],
+    ["TEN", 10]
+    ["TWENTY", 20],
+    ["ONE HUNDRED", 100]
+  ];
 
-  rend(monnaie, 0.25);
+  let maCaisse = cid;
+  console.log(maCaisse)
+
+//lance la fonction rend()
+  rend(monnaie, val = 100);
 
   function rend(monnaie, val) {
-    while (monnaie > 0) {
-      console.log("monnaie:", monnaie);
-      monnaie = monnaie - val;
-    }
+    maCaisse.map(elem => {
+
+    })
   }
 
   console.log("CHANGE:", change);
-  //return change;
+  return change;
 }
 
 //////////////////////////////////////////////////////////////
@@ -33,6 +48,8 @@ checkCashRegister(19.5, 20, [
   ["TWENTY", 60],
   ["ONE HUNDRED", 100]
 ]);
+
+//////////////////////////////////////////////////////////////
 
 /*
 JavaScript Algorithms and Data Structures Projects: Cash Register
@@ -58,16 +75,4 @@ Five Dollars         $5 (FIVE)
 Ten Dollars          $10 (TEN)
 Twenty Dollars       $20 (TWENTY)
 One-hundred Dollars  $100 (ONE HUNDRED)
-
 */
-const valors = {
-  Penny: 0.01,
-  Nickel: 0.05,
-  Dime: 0.1,
-  Quarter: 0.25,
-  Dollar: 1,
-  fiveDollars: 5,
-  tenDollars: 10,
-  twentyDollars: 20,
-  oneHundredDollars: 100
-};
