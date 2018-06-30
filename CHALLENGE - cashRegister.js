@@ -7,35 +7,20 @@ function checkCashRegister(price, cash, cid) {
     change: []
   };
 
-  const valors = {
-    "PENNY": 0.01,
-    "NICKEL": 0.05,
-    "DIME": 0.1,
-    "QUARTER": 0.25,
-    "ONE": 1,
-    "FIVE": 5,
-    "TEN": 10,
-    "TWENTY": 20,
-    "ONE HUNDRED": 100
-  };
-
-  let maCaisse = cid; //les pieces dans maCaisse
-
-  maCaisse.map(elem => {
-    monnaie > valors[elem[0]] ?
-    rend(monnaie, valors[elem[0]]) :
-    null;
-    console.log(`maCaisse -> ${elem[0]} = ${elem[1]}`);
-  });
-
-//fonction rend()
-  function rend(monnaie, val) {
-    console.log(`monaie = ${monnaie} et val = ${val}`)
+  const valors = [
+    ["ONE HUNDRED", 100],
+    ["TWENTY", 20],
+    ["TEN", 10],
+    ["FIVE", 5],
+    ["ONE", 1],
+    ["QUARTER", 0.25],
+    ["DIME", 0.1],
+    ["NICKEL", 0.05],
+    ["PENNY", 0.01]
+  ];
+  
+    return change ;
   }
-
-  console.log("CHANGE:", change);
-  return change;
-}
 
 /////////////////////  APPEL DE L'APP  /////////////////////
 
