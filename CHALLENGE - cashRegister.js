@@ -8,20 +8,29 @@ function checkCashRegister(price, cash, cid) {
 
   let maCaisse = {};
   cid.map(v => (maCaisse[v[0]] = v[1])); //les pieces dans maCaisse
-  console.log("maCaisse: ", maCaisse);
+  console.log("maCaisse: ", maCaisse);  
 
   const valors = {
-    "ONE HUNDRED": 100,
-    TWENTY: 20,
-    TEN: 10,
-    FIVE: 5,
-    ONE: 1,
-    QUARTER: 0.25,
-    DIME: 0.1,
-    NICKEL: 0.05,
-    PENNY: 0.01
+    'ONE HUNDRED': 100,
+    'TWENTY': 20,
+    'TEN': 10,
+    'FIVE': 5,
+    'ONE': 1,
+    'QUARTER': 0.25,
+    'DIME': 0.1,
+    'NICKEL': 0.05,
+    'PENNY': 0.01
   };
+  const text = ()=>{console.log('il faut rendre ' + aRendre)}
 
+function rendre() {
+aRendre > 0 ?
+text() :
+'BANCO'
+}
+
+
+rendre(aRendre,)
   
   console.log("MONNAIE:", aRendre);
   console.log("CHANGE:", change);
