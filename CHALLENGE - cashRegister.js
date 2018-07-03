@@ -1,42 +1,32 @@
 function checkCashRegister(price, cash, cid) {
-
-  let monnaie = cash - price; // monnaie à rendre
+  let aRendre = cash - price; // monnaie à rendre
 
   const change = {
     status: "",
     change: []
   };
 
+  let maCaisse = {};
+  cid.map(v => (maCaisse[v[0]] = v[1])); //les pieces dans maCaisse
+  console.log("maCaisse: ", maCaisse);
+
   const valors = {
-    "PENNY": 0.01,
-    "NICKEL": 0.05,
-    "DIME": 0.1,
-    "QUARTER": 0.25,
-    "ONE": 1,
-    "FIVE": 5,
-    "TEN": 10,
-    "TWENTY": 20,
-    "ONE HUNDRED": 100
+    "ONE HUNDRED": 100,
+    TWENTY: 20,
+    TEN: 10,
+    FIVE: 5,
+    ONE: 1,
+    QUARTER: 0.25,
+    DIME: 0.1,
+    NICKEL: 0.05,
+    PENNY: 0.01
   };
 
-  let maCaisse = cid; //les pieces dans maCaisse
-
-  maCaisse.map(elem => {
-    monnaie > valors[elem[0]] ?
-    rend(monnaie, valors[elem[0]]) :
-    null;
-    console.log(`maCaisse -> ${elem[0]} = ${elem[1]}`);
-  });
-
-//fonction rend()
-  function rend(monnaie, val) {
-    console.log(`monaie = ${monnaie} et val = ${val}`)
-  }
-
+  
+  console.log("MONNAIE:", aRendre);
   console.log("CHANGE:", change);
   return change;
 }
-
 /////////////////////  APPEL DE L'APP  /////////////////////
 
 checkCashRegister(19.5, 20, [
