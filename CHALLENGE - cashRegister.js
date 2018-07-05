@@ -6,42 +6,40 @@ function checkCashRegister(price, cash, cid) {
     change: []
   };
 
-  let maCaisse = {};
-  cid.map(v => (maCaisse[v[0]] = v[1])); //les pieces dans maCaisse
-  console.log("maCaisse: ", maCaisse);
-  console.log("CID: ", cid);
+  let maCaisse = cid;
 
-  const valors = {
-    'ONE HUNDRED': 100,
-    'TWENTY': 20,
-    'TEN': 10,
-    'FIVE': 5,
-    'ONE': 1,
-    'QUARTER': 0.25,
-    'DIME': 0.1,
-    'NICKEL': 0.05,
-    'PENNY': 0.01
-  };
+  const valors = [
+    ['ONE HUNDRED', 100],
+    ['TWENTY', 20 ],
+    ['TEN', 10],
+    ['FIVE', 5],
+    ['ONE', 1],
+    ['QUARTER', 0.25],
+    ['DIME', 0.1],
+    ['NICKEL', 0.05],
+    ['PENNY', 0.01]
+  ];
 
-let i = 0;
+let n = 0;
+let rendu = 0
 
-  function rendre () {
-    for (let v in valors) {
-      console.log('maCaisse.valor : ', maCaisse[v])
-      const val = valors[v];
-      //console.log('val: ',val)
-      while (aRendre === val || val < aRendre> 0){
-        i++;
-        aRendre -= val;
-        rendre()
-        return;
+  const rendre = () => {
+    for(let i = 0 ; i < valors.length; i++){
+      if (valors[i][1] <= aRendre) {
+        aRendre -= valors[i][1];
+        n++;
+        change.change.push(valors[i])
+        rendre() 
       }
-    }
-  }
-  console.log('arendre apres function',aRendre)
+      }
+      }
+    
   
-  rendre(aRendre, maCaisse);
-  console.log('i : ',i)
+  
+  rendre();
+  console.log('n : ',n)
+  console.log(aRendre)
+  console.log(change)
   
   //console.log('arendre function',aRendre)
   return change;
