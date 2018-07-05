@@ -8,8 +8,7 @@ function checkCashRegister(price, cash, cid) {
 
   let maCaisse = {};
   cid.map(v => (maCaisse[v[0]] = v[1])); //les pieces dans maCaisse
-  console.log("maCaisse: ", maCaisse);
-  console.log("CID: ", cid);
+  console.log("maCaisse: ", maCaisse);  
 
   const valors = {
     'ONE HUNDRED': 100,
@@ -23,27 +22,24 @@ function checkCashRegister(price, cash, cid) {
     'PENNY': 0.01
   };
 
-let i = 0;
-
-  function rendre () {
-    for (let v in valors) {
-      console.log('maCaisse.valor : ', maCaisse[v])
-      const val = valors[v];
-      //console.log('val: ',val)
-      while (aRendre === val || val < aRendre> 0){
-        i++;
-        aRendre -= val;
-        rendre()
-        return;
-      }
+function rendre(aRendre,maCaisse) {
+while(aRendre > 0 ) {
+  for(let valor in valors){
+    if(valors[valor] < aRendre){
+      aRendre = aRendre - valors[valor]
     }
   }
-  console.log('arendre apres function',aRendre)
+}
+}
+
+function compte(aRendre){
+
+}
+
+rendre(aRendre,maCaisse)
   
-  rendre(aRendre, maCaisse);
-  console.log('i : ',i)
-  
-  //console.log('arendre function',aRendre)
+  console.log("MONNAIE:", aRendre);
+  console.log("CHANGE:", change);
   return change;
 }
 /////////////////////  APPEL DE L'APP  /////////////////////
@@ -61,12 +57,6 @@ checkCashRegister(19.5, 20, [
 ]);
 
 /////////////////////  APPEL DE L'APP  /////////////////////
-
-// status: "INSUFFICIENT_FUNDS"
-// status: "CLOSED"
-// status: "OPEN"
-
-
 
 // NSTRUCTIONS :
 
