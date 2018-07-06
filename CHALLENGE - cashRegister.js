@@ -9,39 +9,45 @@ function checkCashRegister(price, cash, cid) {
   let maCaisse = cid;
 
   const valors = [
-    ['ONE HUNDRED', 100],
-    ['TWENTY', 20 ],
-    ['TEN', 10],
-    ['FIVE', 5],
-    ['ONE', 1],
-    ['QUARTER', 0.25],
-    ['DIME', 0.1],
-    ['NICKEL', 0.05],
-    ['PENNY', 0.01]
+    ["ONE HUNDRED", 100],
+    ["TWENTY", 20],
+    ["TEN", 10],
+    ["FIVE", 5],
+    ["ONE", 1],
+    ["QUARTER", 0.25],
+    ["DIME", 0.1],
+    ["NICKEL", 0.05],
+    ["PENNY", 0.01]
   ];
 
-let n = 0;
-let rendu = 0
+  let n = 0;
+  let rendu = 0;
 
   const rendre = () => {
-    for(let i = 0 ; i < valors.length; i++){
+    for (let i = 0; i < valors.length; i++) {
       if (valors[i][1] <= aRendre) {
         aRendre -= valors[i][1];
         n++;
-        change.change.push(valors[i])
-        rendre() 
+        indexation(valors[i]);
+        //change.change.push(valors[i]);
+        rendre();
       }
-      }
-      }
-    
-  
-  
+    }
+  };
+
+  function indexation(val) {
+    change.change.map(
+      el => el[0] === val[0] ?
+        this[] = 150  :
+        console.log("ils ont differents")
+    );
+  }
+
   rendre();
-  console.log('n : ',n)
-  console.log(aRendre)
-  console.log(change)
-  
-  //console.log('arendre function',aRendre)
+  console.log("n : ", n);
+  console.log(aRendre);
+  console.log(change);
+
   return change;
 }
 /////////////////////  APPEL DE L'APP  /////////////////////
@@ -63,8 +69,6 @@ checkCashRegister(19.5, 20, [
 // status: "INSUFFICIENT_FUNDS"
 // status: "CLOSED"
 // status: "OPEN"
-
-
 
 // NSTRUCTIONS :
 
