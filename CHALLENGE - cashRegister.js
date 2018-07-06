@@ -20,6 +20,9 @@ function checkCashRegister(price, cash, cid) {
     ["PENNY", 0.01]
   ];
 
+  const [monnaie, valeur] = valors[0];
+  console.log(`on utilise la monaie ${monnaie} avec une caisse de ${valeur}`)
+
   let n = 0;
   let rendu = 0;
 
@@ -36,11 +39,7 @@ function checkCashRegister(price, cash, cid) {
   };
 
   function indexation(val) {
-    change.change.map(
-      el => el[0] === val[0] ?
-        this[] = 150  :
         console.log("ils ont differents")
-    );
   }
 
   rendre();
