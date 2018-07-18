@@ -22,31 +22,21 @@ function checkCashRegister(price, cash, cid) {
     ["PENNY", 0.01]
   ];
 
-  const choose = (a, b) => {
-    a < b ?
-      rend(a) :
-      console.log('tropGrand')
+  function choisis(m, v) {
+    let total = 0;
+    while (m >= v) {
+      rend(m, v)
+      function rend(m, v) {
+        console.log('m: ',m)
+        m = m - v;
+      }
+    }
   }
+  choisis(0.5, 0.25)
 
-let compteur = 0
-const rend = (m, v) => {
-  m >= v ?
-    (() => {
-      m -= v;
-      compteur ++;
-      console.log(`m: ${m} et compteur: ${compteur}`);
-      rend(m, v);
-    })() :
-    change.change.push(["quarter",v*compteur] )
-}
-
-rend(10, 2)
-console.log('change: ',change)
 
   return change;
 }
-
-
 
 /////////////////////  APPEL DE L'APP  /////////////////////
 checkCashRegister(19.5, 20, [
