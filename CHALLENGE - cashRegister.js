@@ -1,7 +1,5 @@
 function checkCashRegister(price, cash, cid) {
 
-  let maCaisse = [...cid];
-
   //crée mon tableau des valeurs
   const valors = [
     ["ONE HUNDRED", 100],
@@ -22,38 +20,46 @@ function checkCashRegister(price, cash, cid) {
   };
 
   //calcul la somme a rendre
-  let aRendre = cash - price; // monnaie à rendre
+  let monnaieARendre = cash - price;
 
   //calcul la somme total en caisse
-  const sommeEnCaisse = maCaisse.reduce((acc, curr) => {
+  const sommeEnCaisse = cid.reduce((acc, curr) => {
     return acc += curr[1];
   }, 0).toFixed(2)
 
   //si la sommeARendre est trop grande je change {change} puis return
-  if (aRendre > sommeEnCaisse) {
-    change.status = "INSUFFICIENT_FUNDS";
-    console.log('pas assez d\'argent')
-    return change;
-  }
-
-  const rend = function(aRendre, valor) {
-    const val = valor[1];
-    console.log('val: ', val)
-    while(val <= aRendre){
-      aRendre -= val;
-      console.log('aRendre: ', aRendre)
-      return rend(aRendre, valor)
+  const verif = (monnaieARendre, sommeEnCaisse) => {
+    if (monnaieARendre > sommeEnCaisse) {
+      change.status = "INSUFFICIENT_FUNDS";
+      console.log('pas assez d\'argent')
+      return change;
     }
   }
 
-  const choose = function(){
-    for(let i = valors.length - 1;i > 0; i--){
-      if (valors[i][1] < aRendre){
-        rend(aRendre, valors[i])
-      }
-    }
+  //je lance ma verif
+  verif(monnaieARendre, sommeEnCaisse);
+
+  //function qui choisit ma monnaie
+  const choose = () => {
+    const temp = valors.filter(val =>val[1]<=monnaieARendre);
+    return temp[0];
   }
-  choose()
+
+  //Function qui rend la monnaie
+  const rend = () => {
+    let counter = 0;
+    const goodChoice = choose();
+    while(goodChoice[1] <= monnaieARendre){
+      counter++;
+      monnaieARendre-=goodChoice[1];
+    }
+    change.status = "OPEN";
+    change.change.push( [goodChoice[0],goodChoice[1]*counter] )
+  }
+
+  rend()
+  console.log('change: ', change)
+  return change
 
 }
 
