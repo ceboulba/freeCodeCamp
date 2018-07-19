@@ -1,15 +1,8 @@
 function checkCashRegister(price, cash, cid) {
 
-  let aRendre = cash - price; // monnaie à rendre
-
-  const change = {
-    status: "OPEN",
-    change: []
-  };
-
   let maCaisse = [...cid];
-  //console.log('maCaisse: ',maCaisse)
 
+  //crée mon tableau des valeurs
   const valors = [
     ["ONE HUNDRED", 100],
     ["TWENTY", 20],
@@ -22,28 +15,46 @@ function checkCashRegister(price, cash, cid) {
     ["PENNY", 0.01]
   ];
 
-  const choose = (a, b) => {
-    a < b ?
-      rend(a) :
-      console.log('tropGrand')
+  //prepare mon objet de retour
+  const change = {
+    status: "",
+    change: []
+  };
+
+  //calcul la somme a rendre
+  let aRendre = cash - price; // monnaie à rendre
+
+  //calcul la somme total en caisse
+  const sommeEnCaisse = maCaisse.reduce((acc, curr) => {
+    return acc += curr[1];
+  }, 0).toFixed(2)
+
+  //si la sommeARendre est trop grande je change {change} puis return
+  if (aRendre > sommeEnCaisse) {
+    change.status = "INSUFFICIENT_FUNDS";
+    console.log('pas assez d\'argent')
+    return change;
   }
 
-let compteur = 0
-const rend = (m, v) => {
-  m >= v ?
-    (() => {
-      m -= v;
-      compteur ++;
-      console.log(`m: ${m} et compteur: ${compteur}`);
-      rend(m, v);
-    })() :
-    change.change.push(["quarter",v*compteur] )
-}
+  const rend = function(aRendre, valor) {
+    const val = valor[1];
+    console.log('val: ', val)
+    while(val <= aRendre){
+      aRendre -= val;
+      console.log('aRendre: ', aRendre)
+      return rend(aRendre, valor)
+    }
+  }
 
-rend(10, 2)
-console.log('change: ',change)
+  const choose = function(){
+    for(let i = valors.length - 1;i > 0; i--){
+      if (valors[i][1] < aRendre){
+        rend(aRendre, valors[i])
+      }
+    }
+  }
+  choose()
 
-  return change;
 }
 
 
@@ -62,6 +73,8 @@ checkCashRegister(19.5, 20, [
 ]);
 /////////////////////  APPEL DE L'APP  /////////////////////
 
+
+
 // status: "INSUFFICIENT_FUNDS"
 // status: "CLOSED"
 // status: "OPEN"
@@ -74,9 +87,42 @@ checkCashRegister(19.5, 20, [
 // cidis a 2D array listing available currency.
 // The checkCashRegister()function should always return an object with a statuskey and a changekey.
 // Return {status: "INSUFFICIENT_FUNDS", change: []}if cash-in-drawer is less than the change due, or if you cannot return the exact change.
-// Return {status: "CLOSED", change: [...]}with cash-in-drawer as the value for the key changeif it is equal to the change due.
+// Return {status: "CLOSED", change: [...]}with cash-in-drawer as the value for the key change if it is equal to the change due.
 // Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins and bills, sorted in highest to lowest order, as the value of the changekey.
 // Remember to use Read-Search-Ask if you get stuck. Try to pair program. Write your own code.
 
 // EXEMPLE:
-// checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])should return {status: "OPEN", change: [["QUARTER", 0.5]]}
+// checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
+// should return {status: "OPEN", change: [["QUARTER", 0.5]]}
+
+/// MES PISTES ///
+
+// je test si j'ai assez en caisse pour rendre la monnaie
+  // function test(sommeEnCaisse, aRendre) {
+  //   if (sommeEnCaisse < aRendre) {
+  //     change.status = "INSUFFICIENT_FUNDS"
+  //     console.log('change: ', change)
+  //     return change
+  //   }
+  //   else {
+  //     let compteur = 0
+
+  //     function rend(m, v) {
+  //       m >= v ?
+  //         (() => {
+  //           m -= v;
+  //           compteur++;
+  //           console.log(`m: ${m} et compteur: ${compteur}`);
+  //           rend(m, v);
+  //         })() :
+  //         change.change.push(["quarter", v * compteur])
+  //     }
+
+  //     for (let i = valors.length - 1; i >= valors.Length; i--) {
+  //       const valor = valors[i]
+  //       rend(aRendre, valor)
+  //     }
+  //     console.log('change: ', change)
+  //     return change;
+  //   };
+  // }
