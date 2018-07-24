@@ -10,8 +10,15 @@ function checkCashRegister(price, cash, cid) {
     ["QUARTER", 0.25],
     ["DIME", 0.1],
     ["NICKEL", 0.05],
-    ["PENNY", 0.01]
+    ["PENNY", 0.01],
   ];
+
+  const cashDispo = [...cid]
+
+  cashDispo.forEach((el)=>{
+    console.log('el: ', el)
+  })
+
 
   //prepare mon objet de retour
   const change = {
@@ -41,23 +48,38 @@ function checkCashRegister(price, cash, cid) {
 
   //function qui choisit ma monnaie
   const choose = () => {
-    const temp = valors.filter(val =>val[1]<=monnaieARendre);
+    const temp = valors.filter(val => val[1] <= monnaieARendre);
     return temp[0];
+  }
+
+  //function qui gere CID
+  const gestionDeCaisse = (valUse) => {
+    const temp = cid.filter(val => val[0] === valUse[0]);
+    return temp[0]
   }
 
   //Function qui rend la monnaie
   const rend = () => {
     let counter = 0;
     const goodChoice = choose();
-    while(goodChoice[1] <= monnaieARendre){
+    const info = gestionDeCaisse(goodChoice);
+    while(goodChoice[1] <= monnaieARendre && info[1] > 0){
+      info[1]-=goodChoice[1];
       counter++;
       monnaieARendre-=goodChoice[1];
     }
+    if(info[1] === 0) {
+      console.log('info[1] ',info[1])
+    }
+    console.log('info, ', info)
     change.status = "OPEN";
     change.change.push( [goodChoice[0],goodChoice[1]*counter] )
+    monnaieARendre === 0 ?
+    console.log(`on a fini , ${monnaieARendre}`) :
+    console.log(`il manque ${monnaieARendre}`)
   }
 
-  rend()
+  //rend()
   console.log('change: ', change)
   return change
 
@@ -66,6 +88,7 @@ function checkCashRegister(price, cash, cid) {
 
 
 /////////////////////  APPEL DE L'APP  /////////////////////
+/*
 checkCashRegister(19.5, 20, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -77,7 +100,18 @@ checkCashRegister(19.5, 20, [
   ["TWENTY", 60],
   ["ONE HUNDRED", 100]
 ]);
+*/
 /////////////////////  APPEL DE L'APP  /////////////////////
+checkCashRegister(3.26, 100, [
+  ["PENNY", 1.01], 
+  ["NICKEL", 2.05], 
+  ["DIME", 3.1], 
+  ["QUARTER", 4.25], 
+  ["ONE", 90], 
+  ["FIVE", 55], 
+  ["TEN", 20], 
+  ["TWENTY", 60], 
+  ["ONE HUNDRED", 100]])
 
 
 
