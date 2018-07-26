@@ -13,18 +13,18 @@ function checkCashRegister(price, cash, cid) {
     ["PENNY", 0.01],
   ];
 
-  const cashDispo = [...cid]
-
-  cashDispo.forEach((el)=>{
-    console.log('el: ', el)
-  })
-
-
   //prepare mon objet de retour
   const change = {
     status: "",
     change: []
   };
+
+  //objet du cash dispo en caisse
+  let cashDispo = {}
+  cid.map(el => {
+    return cashDispo[el[0]] = el[1];
+  })
+  //console.log('cashDispo : ', cashDispo)
 
   //calcul la somme a rendre
   let monnaieARendre = cash - price;
@@ -32,52 +32,32 @@ function checkCashRegister(price, cash, cid) {
   //calcul la somme total en caisse
   const sommeEnCaisse = cid.reduce((acc, curr) => {
     return acc += curr[1];
-  }, 0).toFixed(2)
+  }, 0).toFixed(2);
+  console.log('somme en caisse: ', sommeEnCaisse)
 
   //si la sommeARendre est trop grande je change {change} puis return
-  const verif = (monnaieARendre, sommeEnCaisse) => {
+  function verif() {
     if (monnaieARendre > sommeEnCaisse) {
       change.status = "INSUFFICIENT_FUNDS";
       console.log('pas assez d\'argent')
       return change;
+    } else {
+      rend(monnaieARendre, cashDispo)
     }
   }
 
-  //je lance ma verif
-  verif(monnaieARendre, sommeEnCaisse);
-
   //function qui choisit ma monnaie
-  const choose = () => {
-    const temp = valors.filter(val => val[1] <= monnaieARendre);
+  function choose(monnaieARendre, cashDispo) {
+    const temp = valors.filter(val => val[1] <= monnaieARendre && cashDispo[val[0]] > 0);
     return temp[0];
   }
 
-  //function qui gere CID
-  const gestionDeCaisse = (valUse) => {
-    const temp = cid.filter(val => val[0] === valUse[0]);
-    return temp[0]
+  function rend(monnaieARendre, cashDispo) {
+    let theChoice = choose(monnaieARendre, cashDispo)
+    console.log('theChoice = ', theChoice)
   }
 
-  //Function qui rend la monnaie
-  const rend = () => {
-    let counter = 0;
-    const goodChoice = choose();
-    const info = gestionDeCaisse(goodChoice);
-    while(goodChoice[1] <= monnaieARendre && info[1] > 0){
-      info[1]-=goodChoice[1];
-      counter++;
-      monnaieARendre-=goodChoice[1];
-    }
-    if(info[1] === 0) {
-      console.log('info[1] ',info[1])
-    }
-    console.log('info, ', info)
-    change.status = "OPEN";
-    change.change.push( [goodChoice[0],goodChoice[1]*counter] )
-    monnaieARendre === 0 ?
-    console.log(`on a fini , ${monnaieARendre}`) :
-    console.log(`il manque ${monnaieARendre}`)
-  }
+  rend(monnaieARendre, cashDispo);
 
   //rend()
   console.log('change: ', change)
@@ -103,14 +83,14 @@ checkCashRegister(19.5, 20, [
 */
 /////////////////////  APPEL DE L'APP  /////////////////////
 checkCashRegister(3.26, 100, [
-  ["PENNY", 1.01], 
-  ["NICKEL", 2.05], 
-  ["DIME", 3.1], 
-  ["QUARTER", 4.25], 
-  ["ONE", 90], 
-  ["FIVE", 55], 
-  ["TEN", 20], 
-  ["TWENTY", 60], 
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
   ["ONE HUNDRED", 100]])
 
 
