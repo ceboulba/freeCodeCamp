@@ -20,20 +20,53 @@ function checkCashRegister(price, cash, cid) {
   };
 
   //objet du cash dispo en caisse
-  let cashDispo = {}
-  cid.map(el => {
-    return cashDispo[el[0]] = el[1];
-  })
-  //console.log('cashDispo : ', cashDispo)
+  let cashDispo = [...cid].reverse();
 
   //calcul la somme a rendre
   let monnaieARendre = cash - price;
+
+  //choix de la bonne valeur
+  function choose() {
+    valors.forEach(function (e) {
+      const [devise, valeur] = e;
+      const enCaisse = cashDispo.filter(val => val[0] === devise );
+      let [deviseEnCaisse, valeurEnCaisse] = enCaisse[0]
+    })
+  }
+
+  choose()
+
+  //function de rendre
+  function rendre(val, solde, aRendre) {
+    while (aRendre > 0 && solde > 0) {
+      aRendre -= val;
+      solde -= val;      
+      rendre(val, solde, aRendre)
+    }
+  }
+
+  function rendLArgent() {
+    cashDispo.map(val => {
+      console.log('​------------------');
+      console.log('​val[1] -> ', val[1]);
+      console.log('​------------------');
+      if (val[1] <= monnaieARendre) {
+        change.change.push(val);
+        change.status = 'OPEN'
+        monnaieARendre -= val[1];
+      }
+    })
+  }
+  // rendLArgent()
+
+
+
+
 
   //calcul la somme total en caisse
   const sommeEnCaisse = cid.reduce((acc, curr) => {
     return acc += curr[1];
   }, 0).toFixed(2);
-  console.log('somme en caisse: ', sommeEnCaisse)
 
   //si la sommeARendre est trop grande je change {change} puis return
   function verif() {
@@ -46,29 +79,12 @@ function checkCashRegister(price, cash, cid) {
     }
   }
 
-  //function qui choisit ma monnaie
-  function choose(monnaieARendre, cashDispo) {
-    const temp = valors.filter(val => val[1] <= monnaieARendre && cashDispo[val[0]] > 0);
-    return temp[0];
-  }
-
-  function rend(monnaieARendre, cashDispo) {
-    let theChoice = choose(monnaieARendre, cashDispo)
-    console.log('theChoice = ', theChoice)
-  }
-
-  rend(monnaieARendre, cashDispo);
-
-  //rend()
-  console.log('change: ', change)
   return change
-
 }
 
 
 
 /////////////////////  APPEL DE L'APP  /////////////////////
-/*
 checkCashRegister(19.5, 20, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -80,8 +96,9 @@ checkCashRegister(19.5, 20, [
   ["TWENTY", 60],
   ["ONE HUNDRED", 100]
 ]);
-*/
+
 /////////////////////  APPEL DE L'APP  /////////////////////
+/*
 checkCashRegister(3.26, 100, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -92,6 +109,7 @@ checkCashRegister(3.26, 100, [
   ["TEN", 20],
   ["TWENTY", 60],
   ["ONE HUNDRED", 100]])
+  */
 
 
 
