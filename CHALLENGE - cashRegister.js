@@ -31,11 +31,12 @@ function checkCashRegister(price, cash, cid) {
       const [devise, valeur] = e;
       const enCaisse = cashDispo.filter(val => val[0] === devise );
       let [deviseEnCaisse, valeurEnCaisse] = enCaisse[0]
+      
     })
   }
 
   choose()
-
+  
   //function de rendre
   function rendre(val, solde, aRendre) {
     while (aRendre > 0 && solde > 0) {
@@ -44,7 +45,9 @@ function checkCashRegister(price, cash, cid) {
       rendre(val, solde, aRendre)
     }
   }
-
+  
+  rendre(0.25, 15, monnaieARendre)
+  
   function rendLArgent() {
     cashDispo.map(val => {
       console.log('​------------------');
@@ -57,11 +60,6 @@ function checkCashRegister(price, cash, cid) {
       }
     })
   }
-  // rendLArgent()
-
-
-
-
 
   //calcul la somme total en caisse
   const sommeEnCaisse = cid.reduce((acc, curr) => {
