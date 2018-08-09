@@ -19,68 +19,99 @@ function checkCashRegister(price, cash, cid) {
     change: []
   };
 
-  //objet du cash dispo en caisse
-  let cashDispo = [...cid].reverse();
-
   //calcul la somme a rendre
-  let monnaieARendre = cash - price;
-
-  //choix de la bonne valeur
-  function choose() {
-    valors.forEach(function (e) {
-      const [devise, valeur] = e;
-      const enCaisse = cashDispo.filter(val => val[0] === devise );
-      let [deviseEnCaisse, valeurEnCaisse] = enCaisse[0]
-      
-    })
-  }
-
-  choose()
-  
-  //function de rendre
-  function rendre(val, solde, aRendre) {
-    while (aRendre > 0 && solde > 0) {
-      aRendre -= val;
-      solde -= val;      
-      rendre(val, solde, aRendre)
-    }
-  }
-  
-  rendre(0.25, 15, monnaieARendre)
-  
-  function rendLArgent() {
-    cashDispo.map(val => {
-      console.log('​------------------');
-      console.log('​val[1] -> ', val[1]);
-      console.log('​------------------');
-      if (val[1] <= monnaieARendre) {
-        change.change.push(val);
-        change.status = 'OPEN'
-        monnaieARendre -= val[1];
-      }
-    })
-  }
+  let sommeARendre = cash - price;
 
   //calcul la somme total en caisse
   const sommeEnCaisse = cid.reduce((acc, curr) => {
     return acc += curr[1];
   }, 0).toFixed(2);
 
-  //si la sommeARendre est trop grande je change {change} puis return
-  function verif() {
-    if (monnaieARendre > sommeEnCaisse) {
-      change.status = "INSUFFICIENT_FUNDS";
-      console.log('pas assez d\'argent')
-      return change;
-    } else {
-      rend(monnaieARendre, cashDispo)
-    }
+  const makeAChoice = () => {
+    const temp = valors.filter(valor => valor[1] < sommeARendre)
+    console.log('​--------------------------');
+    console.log('​makeAChoice -> temp', temp);
+    console.log('​--------------------------');    
+    temp[0]
   }
 
-  return change
+  const rendre = () => {
+    const choix = enCaisse()
+    const [devise, valeur] = choix;
+    console.log('​-------------------------');
+    console.log('​rendre -> valeur', valeur);
+    console.log('​-------------------------');
+    console.log('​-------------------------');
+    console.log('​rendre -> devise', devise);
+    console.log('​-------------------------');
+  }
+  
+const h = rendre()
+
+  const enCaisse = () => {
+    const choosen = makeAChoice()
+    console.log('​-----------------------------');
+    console.log('​enCaisse -> choosen', choosen);
+    console.log('​-----------------------------');
+    
+    const filtred = cid.filter(val => val[0] === choosen[0])
+    filtred
+  }
+ const gh = enCaisse()
+ 
+  
+
+  //si la sommeARendre est trop grande je change {change} puis return
+  function test() {
+    if (sommeARendre > sommeEnCaisse) {
+      change.status = 'PLUS de sous'
+    } else {
+      console.log('onva passer aux choses serieuses')
+    }
+    return;
+  }
+  test()
+
+  const premier = ([arr]) => arr;
+  console.log(premier([1, 2, 3, 4, 5]))
+
+
+  /*
+    //choix de la bonne valeur
+    function choose() {
+      valors.forEach(function (e) {
+        const [devise, valeur] = e;
+        const enCaisse = cashDispo.filter(val => val[0] === devise);
+        let [deviseEnCaisse, valeurEnCaisse] = enCaisse[0]
+      })
+    }
+    choose()
+  */
+  //function de rendre
+  // function rendre(val, soldeI, aRendre) {
+  //   while (aRendre > 0 && soldeI > 0) {
+  //     aRendre -= val;
+  //     soldeI -= val;
+  //     rendre(val, soldeI, aRendre)
+  //   }
+  //   sommeARendre = aRendre;
+  //   solde = soldeI;
+  // }
+  // rendre(0.25, 15, sommeARendre)
+
+  function rendLArgent() {
+    cashDispo.map(val => {
+      console.log('​------------------');
+      console.log('​val[1] -> ', val[1]);
+      console.log('​------------------');
+      if (val[1] <= sommeARendre) {
+        change.change.push(val);
+        change.status = 'OPEN'
+        sommeARendre -= val[1];
+      }
+    })
+  }
 }
-
-
 
 /////////////////////  APPEL DE L'APP  /////////////////////
 checkCashRegister(19.5, 20, [
