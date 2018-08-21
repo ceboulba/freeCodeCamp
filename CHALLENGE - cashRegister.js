@@ -16,50 +16,40 @@ function checkCashRegister(price, cash, cid) {
     ["PENNY", 0.01]
   ];
 
-  //tableau des pieces dispo en caisses
-  let cashDispo = [...cid];
-  console.log("cashDispo = ", cashDispo);
-
-  const totalEnCaisse = cashDispo
+  //somme total en caisse
+  const sommeEnCaisse = cid
     .reduce((acc, curr) => {
       return acc + curr[1];
     }, 0)
     .toFixed(2);
-  console.log("TotalEnCaisse = ", totalEnCaisse);
+  console.log("sommeEnCaisse = ", sommeEnCaisse);
+
+  //choose a money
+  function choose() {
+    return valors.filter(val => val[1] < monnaieARendre);
+  }
+  const filtred = choose();
+
+  let boite = [];
+
+  function rend(picked, name) {
+    let counter = 0;
+    while (monnaieARendre > 0) {
+      monnaieARendre -= picked;
+      counter++;
+      console.log('monnaie -> ', monnaieARendre)
+    }
+    boite.push([picked*counter, name])
+  }
+  rend(0.1,'my money');
+  console.log('boite => ',boite)
+
 
   //prepare mon objet de retour
   const change = {
     status: "",
     change: []
   };
-
-  const verif = () => {
-    totalEnCaisse < monnaieARendre
-      ? ( () => { true;
-                  change.status = 'INSUFFICIENT_FUNDS' })()
-      : false;
-  };
-
-  function moneyBack(){
-    verif();
-    const moneyValid = cashDispo.filter( val => val[1] < monnaieARendre)
-    console.log('​moneyBack -> moneyValid -> ',moneyValid);
-    
-    //rendre(monnaieARendre, temp[0])
-  }
-
-  function rendre(due, somme) {
-     somme[1] > due ?
-    ( ()=>{
-      change.status = 'OPEN';
-      change.change.push(somme)
-    })():
-    ( ()=>{} )() 
-  }
-
-  moneyBack();
-  console.log("change: ", change);
-  return change;
 }
 
 /////////////////////  APPEL DE L'APP  /////////////////////
@@ -68,7 +58,7 @@ checkCashRegister(19.5, 20, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
   ["DIME", 3.1],
-  ["QUARTER", 4.25],
+  ["QUARTER", 4.25], //4.25
   ["ONE", 90],
   ["FIVE", 55],
   ["TEN", 20],
@@ -140,4 +130,4 @@ checkCashRegister(3.26, 100, [
 //     console.log('change: ', change)
 //     return change;
 //   };
-// }
+//
