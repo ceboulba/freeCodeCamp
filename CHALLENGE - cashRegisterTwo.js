@@ -22,17 +22,31 @@ function checkCashRegister(price, cash, cid) {
     let sommeARendre = cash - price;
     
     //choix de la monnaie a rendre
-    const makeAChoice = ( () => {
+    const makeAChoice = () => {
         const temp = valors.filter(val => val[1] < sommeARendre);
-        return temp[0]        
-    }) ()
-    console.log('​----------------------------------------');
-    console.log('​makeAChoice -> makeAChoice', makeAChoice);
-    console.log('​----------------------------------------');
+        return temp[0]
+    };
 
-    const rendre = () => {
-        console.log('on va calculer !')
-    }
+    //calcul du sock de la monnaie choisit
+    const stock = (choice) => {
+        const temp = cid.filter(val => val[0] === choice[0] );
+        return temp[0][1];
+    };
+
+     const rendre = () => {
+        let rendu = 0;
+        let choix = makeAChoice();
+        let stockDispo = stock(choix);
+        while(sommeARendre > 0 && stockDispo > 0) {
+          sommeARendre-=choix[1];
+          stockDispo -= choix[1];
+          rendu += choix[1];
+        }
+        reponse.change.push([choix[0], rendu]);
+        sommeARendre === 0 ?
+        reponse.status = 'OPEN'
+        : null
+        }
     
     //calcul si la somme total en caisse est suffisante
     const checkMyTotal = ( () => {
@@ -43,8 +57,10 @@ function checkCashRegister(price, cash, cid) {
                 reponse.status = 'INSUFFICIENT_FUNDS';
                 reponse.change = [];
             })();
-    } )()
-
+        } )()
+        
+       
+        
     console.log('​------------------------');
     console.log('​checkCashRegister -> reponse -> ', reponse );
     console.log('​------------------------');
@@ -63,6 +79,19 @@ checkCashRegister(19.5, 20, [
     ["TWENTY", 60],
     ["ONE HUNDRED", 100]
 ]);
+
+/////////////////////  APPEL DE L'APP  /////////////////////
+
+checkCashRegister(3.26, 100, [
+    ["PENNY", 1.01],
+    ["NICKEL", 2.05],
+    ["DIME", 3.1],
+    ["QUARTER", 4.25],
+    ["ONE", 90],
+    ["FIVE", 55],
+    ["TEN", 20],
+    ["TWENTY", 60],
+    ["ONE HUNDRED", 100]])
 
 // NSTRUCTIONS :
 
