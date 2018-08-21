@@ -33,6 +33,17 @@ function checkCashRegister(price, cash, cid) {
         return temp[0][1];
     };
 
+        //calcul si la somme total en caisse est suffisante
+        const checkMyTotal = ( () => {
+            let totalEnCaisse = cid.reduce( (acc,val) => acc+val[1],0).toFixed(2)
+            totalEnCaisse > sommeARendre ? 
+                rendre() :
+                (() => {
+                    reponse.status = 'INSUFFICIENT_FUNDS';
+                    reponse.change = [];
+                })();
+            } )()
+
      const rendre = () => {
         let rendu = 0;
         let choix = makeAChoice();
@@ -46,18 +57,10 @@ function checkCashRegister(price, cash, cid) {
         sommeARendre === 0 ?
         reponse.status = 'OPEN'
         : null
+
         }
     
-    //calcul si la somme total en caisse est suffisante
-    const checkMyTotal = ( () => {
-        let totalEnCaisse = cid.reduce( (acc,val) => acc+val[1],0).toFixed(2)
-        totalEnCaisse > sommeARendre ? 
-            rendre() :
-            (() => {
-                reponse.status = 'INSUFFICIENT_FUNDS';
-                reponse.change = [];
-            })();
-        } )()
+
         
        
         
