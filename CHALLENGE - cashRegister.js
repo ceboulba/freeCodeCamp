@@ -16,44 +16,68 @@ function checkCashRegister(price, cash, cid) {
     ["PENNY", 0.01]
   ];
 
-  //somme total en caisse
-  const sommeEnCaisse = cid
-    .reduce((acc, curr) => {
-      return acc + curr[1];
-    }, 0)
-    .toFixed(2);
-  console.log("sommeEnCaisse = ", sommeEnCaisse);
-
-  //choose a money
-  function choose() {
-    return valors.filter(val => val[1] < monnaieARendre);
-  }
-  const filtred = choose();
-
-  let boite = [];
-
-  function rend(picked, name) {
-    let counter = 0;
-    while (monnaieARendre > 0) {
-      monnaieARendre -= picked;
-      counter++;
-      console.log('monnaie -> ', monnaieARendre)
-    }
-    boite.push([picked*counter, name])
-  }
-  rend(0.1,'my money');
-  console.log('boite => ',boite)
-
-
   //prepare mon objet de retour
   const change = {
     status: "",
     change: []
   };
+
+  //calcul la somme a rendre
+  let sommeARendre = cash - price;
+
+  //calcul la somme total en caisse
+  let sommeEnCaisse = cid.reduce((acc, curr) => {
+    return acc += curr[1];
+  }, 0).toFixed(2);
+
+  //function qui choisit la devise à utiliser
+  const makeAChoice = () => {
+    const temp = valors.filter(valor => valor[1] < sommeARendre);
+    return temp[0];
+  } 
+
+  //function qui choisit la somme en caisse de la devise choisit
+  const enCaisse = () => {
+    const choice = makeAChoice();
+    const monnaieEnCaisse = cid.filter(val => val[0] === choice[0]);
+    return monnaieEnCaisse[0][1];
+  }
+  rend(0.1,'my money');
+  console.log('boite => ',boite)
+
+  const rendre = () => {
+    //test()
+    const choix = makeAChoice();
+    const [devise, valeur] = choix;
+    let sommeEnCaisse = enCaisse();
+    let counter = 0;
+    while(sommeARendre > 0 && sommeEnCaisse > 0){
+      counter++;
+      sommeARendre -= valeur;
+      sommeEnCaisse -=  valeur;
+    }
+    change.status = "open"
+    change.change.push([devise, valeur * counter]);
+  }
+
+  sommeEnCaisse === 0 ?
+  null :
+  rendre()
+
+  console.log('​------------------------------');
+  console.log('​checkCashRegister -> change -> ', change);
+  console.log('​------------------------------');  
+
+  //si la sommeARendre est trop grande je change {change} puis return
+  function test() {
+    sommeARendre > sommeEnCaisse ?
+      change.status = 'PLUS de sous' :
+      console.log('on va passer aux choses serieuses')
+  }
+
 }
 
 /////////////////////  APPEL DE L'APP  /////////////////////
-
 checkCashRegister(19.5, 20, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -67,7 +91,6 @@ checkCashRegister(19.5, 20, [
 ]);
 
 /////////////////////  APPEL DE L'APP  /////////////////////
-/*
 checkCashRegister(3.26, 100, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -77,8 +100,10 @@ checkCashRegister(3.26, 100, [
   ["FIVE", 55],
   ["TEN", 20],
   ["TWENTY", 60],
-  ["ONE HUNDRED", 100]
-]);*/
+  ["ONE HUNDRED", 100]])
+  
+
+
 
 // status: "INSUFFICIENT_FUNDS"
 // status: "CLOSED"
