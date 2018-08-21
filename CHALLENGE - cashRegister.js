@@ -31,9 +31,9 @@ function checkCashRegister(price, cash, cid) {
   const makeAChoice = () => {
     const temp = valors.filter(valor => valor[1] < sommeARendre);
     return temp[0];
-  }
+  } 
 
-  //function qui return la somme en caisse de la devise choisit
+  //function qui choisit la somme en caisse de la devise choisit
   const enCaisse = () => {
     const choice = makeAChoice();
     const monnaieEnCaisse = cid.filter(val => val[0] === choice[0]);
@@ -41,7 +41,7 @@ function checkCashRegister(price, cash, cid) {
   }
 
   const rendre = () => {
-    test()
+    //test()
     const choix = makeAChoice();
     const [devise, valeur] = choix;
     let sommeEnCaisse = enCaisse();
