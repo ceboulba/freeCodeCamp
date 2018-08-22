@@ -16,12 +16,7 @@ function checkCashRegister(price, cash, cid) {
 		["NICKEL", 0.05],
 		["PENNY", 0.01]
 	];
-
-const lesValeurs = valors.reduce((acc, val)=>{
-
- acc.push( { {`${val[0]}: ${val[1]}`} } )
-},[] )	
-
+	
 	//calcul de la somme a rendre
 	let sommeARendre = cash - price;
 	console.log("​------------------------------------------------");
