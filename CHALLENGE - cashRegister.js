@@ -1,6 +1,9 @@
 function checkCashRegister(price, cash, cid) {
 
-  //crée mon tableau des valeurs
+  //calcul la somme a rendre
+  let monnaieARendre = cash - price;
+
+  //  tableau des valeurs
   const valors = [
     ["ONE HUNDRED", 100],
     ["TWENTY", 20],
@@ -10,7 +13,7 @@ function checkCashRegister(price, cash, cid) {
     ["QUARTER", 0.25],
     ["DIME", 0.1],
     ["NICKEL", 0.05],
-    ["PENNY", 0.01],
+    ["PENNY", 0.01]
   ];
 
   //prepare mon objet de retour
@@ -39,6 +42,8 @@ function checkCashRegister(price, cash, cid) {
     const monnaieEnCaisse = cid.filter(val => val[0] === choice[0]);
     return monnaieEnCaisse[0][1];
   }
+  rend(0.1,'my money');
+  console.log('boite => ',boite)
 
   const rendre = () => {
     //test()
@@ -77,7 +82,7 @@ checkCashRegister(19.5, 20, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
   ["DIME", 3.1],
-  ["QUARTER", 4.25],
+  ["QUARTER", 4.25], //4.25
   ["ONE", 90],
   ["FIVE", 55],
   ["TEN", 20],
@@ -86,7 +91,6 @@ checkCashRegister(19.5, 20, [
 ]);
 
 /////////////////////  APPEL DE L'APP  /////////////////////
-
 checkCashRegister(3.26, 100, [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -124,31 +128,31 @@ checkCashRegister(3.26, 100, [
 /// MES PISTES ///
 
 // je test si j'ai assez en caisse pour rendre la monnaie
-  // function test(sommeEnCaisse, aRendre) {
-  //   if (sommeEnCaisse < aRendre) {
-  //     change.status = "INSUFFICIENT_FUNDS"
-  //     console.log('change: ', change)
-  //     return change
-  //   }
-  //   else {
-  //     let compteur = 0
+// function test(sommeEnCaisse, aRendre) {
+//   if (sommeEnCaisse < aRendre) {
+//     change.status = "INSUFFICIENT_FUNDS"
+//     console.log('change: ', change)
+//     return change
+//   }
+//   else {
+//     let compteur = 0
 
-  //     function rend(m, v) {
-  //       m >= v ?
-  //         (() => {
-  //           m -= v;
-  //           compteur++;
-  //           console.log(`m: ${m} et compteur: ${compteur}`);
-  //           rend(m, v);
-  //         })() :
-  //         change.change.push(["quarter", v * compteur])
-  //     }
+//     function rend(m, v) {
+//       m >= v ?
+//         (() => {
+//           m -= v;
+//           compteur++;
+//           console.log(`m: ${m} et compteur: ${compteur}`);
+//           rend(m, v);
+//         })() :
+//         change.change.push(["quarter", v * compteur])
+//     }
 
-  //     for (let i = valors.length - 1; i >= valors.Length; i--) {
-  //       const valor = valors[i]
-  //       rend(aRendre, valor)
-  //     }
-  //     console.log('change: ', change)
-  //     return change;
-  //   };
-  // }
+//     for (let i = valors.length - 1; i >= valors.Length; i--) {
+//       const valor = valors[i]
+//       rend(aRendre, valor)
+//     }
+//     console.log('change: ', change)
+//     return change;
+//   };
+//
