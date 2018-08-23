@@ -1,5 +1,4 @@
 function checkCashRegister(price, cash, cid) {
-<<<<<<< HEAD
   const reponse = {
     status: "",
     change: []
@@ -64,7 +63,6 @@ function checkCashRegister(price, cash, cid) {
   }
   checkMyTotal();
 
-<<<<<<< HEAD
         //calcul si la somme total en caisse est suffisante
         const checkMyTotal = ( () => {
             let totalEnCaisse = cid.reduce( (acc,val) => acc+val[1],0).toFixed(2)
@@ -96,13 +94,10 @@ function checkCashRegister(price, cash, cid) {
         
        
         
-=======
->>>>>>> fromMyMBP
     console.log('​------------------------');
     console.log('​checkCashRegister -> reponse -> ', reponse );
     console.log('​------------------------');
   return reponse;
-=======
 	//preparation de l'objet a return
 	const reponse = {
 		status: "",
@@ -169,12 +164,10 @@ function checkCashRegister(price, cash, cid) {
 	console.log('​checkCashRegister -> reponse -> ', reponse);
 	console.log('​------------------------');
 	return reponse;
->>>>>>> fromMyMBP
 }
 
 /////////////////////  APPEL DE L'APP  /////////////////////
 checkCashRegister(19.5, 20, [
-<<<<<<< HEAD
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
   ["DIME", 3.1],
@@ -184,23 +177,11 @@ checkCashRegister(19.5, 20, [
   ["TEN", 20],
   ["TWENTY", 60],
   ["ONE HUNDRED", 100]
-=======
-	["PENNY", 1.01],
-	["NICKEL", 2.05],
-	["DIME", 3.1],
-	["QUARTER", 4.25],
-	["ONE", 90],
-	["FIVE", 55],
-	["TEN", 20],
-	["TWENTY", 60],
-	["ONE HUNDRED", 100]
->>>>>>> fromMyMBP
 ]);
 
 /////////////////////  APPEL DE L'APP  /////////////////////
 
 checkCashRegister(3.26, 100, [
-<<<<<<< HEAD
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
   ["DIME", 3.1],
@@ -210,17 +191,6 @@ checkCashRegister(3.26, 100, [
   ["TEN", 20],
   ["TWENTY", 60],
   ["ONE HUNDRED", 100]
-=======
-	["PENNY", 1.01],
-	["NICKEL", 2.05],
-	["DIME", 3.1],
-	["QUARTER", 4.25],
-	["ONE", 90],
-	["FIVE", 55],
-	["TEN", 20],
-	["TWENTY", 60],
-	["ONE HUNDRED", 100]
->>>>>>> fromMyMBP
 ]);
 
 // NSTRUCTIONS :
