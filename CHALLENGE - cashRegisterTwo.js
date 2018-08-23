@@ -1,5 +1,4 @@
 function checkCashRegister(price, cash, cid) {
-
   //preparation de l'objet à rendre
   const reponse = {
     status: "",
@@ -23,9 +22,18 @@ function checkCashRegister(price, cash, cid) {
   let sommeARendre = cash - price;
 
   //choix de la monnaie a rendre
+  // const makeAChoice = () => {
+  //   const temp = valors.find(valor => valor[1] < sommeARendre);
+  //   return temp;
+  // };
   const makeAChoice = () => {
-    const temp = valors.find(valor => valor[1] < sommeARendre);
-    return temp;
+    const temp = valors.filter(valor => valor[1] < sommeARendre);
+    const enStock = temp.filter(valeur => {
+      const [devise, val] = valeur;
+    })
+    };
+    console.log('makeChoice -> enStock -> ',enStock)
+    return enStock;
   };
 
   //calcul du sock de la monnaie choisit
@@ -42,51 +50,39 @@ function checkCashRegister(price, cash, cid) {
     return totalEnCaisse;
   }
 
-	const rendre = () => {
+  const rendre = () => {
+    console.log(`on va rendre ${sommeARendre}`);
     let rendu = 0;
-    let valor = makeAChoice()
-    let stockDispo = stock();
-    let choix = valor[1];
-    let [devise,enStock] = stockDispo;
-// console.log('devise -> ',devise,' enstock -> ',enStock,' choix -> ',choix)
+    let stockDispo = makeAChoice();
 
-		while (enStock > 0 && sommeARendre > 0) {
-			sommeARendre -= choix;
-      enStock -= choix;
-      rendu += choix;
-    }
-    
-    if(sommeARendre === 0) {
-      reponse.change.push([devise, rendu]);
-      reponse.status = 'OPEN';
-      return;
-    }
+    console.log("rendre -> stockDispo -> ", stockDispo);
   };
-  
+
+    //let choix = valor[1];
+    // while (enStock > 0 && sommeARendre > 0) {
+    //   sommeARendre -= choix;
+    //   enStock -= choix;
+    //   rendu += choix;
+    // }
+
+    // if (sommeARendre === 0 || enStock === 0) {
+    //   reponse.change.push([devise, rendu]);
+    //   reponse.status = "OPEN";
+    //   sommeARendre = sommeARendre.toFixed(2);
+    //   console.log("sommeARendre -> ", sommeARendre);
+    //   sommeARendre === 0 ? null : rendre();
+    // }
+
   rendre();
 
-	console.log('​------------------------');
-	console.log('​checkCashRegister -> reponse -> ', reponse);
-	console.log('​------------------------');
-	return reponse;
+  console.log("​------------------------");
+  console.log("​checkCashRegister -> reponse -> ", reponse);
+  console.log("​------------------------");
+  return reponse;
 }
 
 /////////////////////  APPEL DE L'APP  /////////////////////
-checkCashRegister(19.5, 20, [
-  ["PENNY", 1.01],
-  ["NICKEL", 2.05],
-  ["DIME", 3.1],
-  ["QUARTER", 4.25],
-  ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],
-  ["ONE HUNDRED", 100]
-]);
-
-/////////////////////  APPEL DE L'APP  /////////////////////
-
-// checkCashRegister(3.26, 100, [
+// checkCashRegister(19.5, 20, [
 //   ["PENNY", 1.01],
 //   ["NICKEL", 2.05],
 //   ["DIME", 3.1],
@@ -97,6 +93,20 @@ checkCashRegister(19.5, 20, [
 //   ["TWENTY", 60],
 //   ["ONE HUNDRED", 100]
 // ]);
+
+/////////////////////  APPEL DE L'APP  /////////////////////
+
+checkCashRegister(3.26, 100, [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+]);
 
 // NSTRUCTIONS :
 
