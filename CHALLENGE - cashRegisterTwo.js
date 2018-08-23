@@ -34,7 +34,7 @@ function checkCashRegister(price, cash, cid) {
     };
     console.log('makeChoice -> enStock -> ',enStock)
     return enStock;
-  };
+  
 
   //calcul du sock de la monnaie choisit
   const stock = () => {
