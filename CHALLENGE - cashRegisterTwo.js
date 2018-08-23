@@ -1,4 +1,5 @@
 function checkCashRegister(price, cash, cid) {
+	//preparation de l'objet a return
 	const reponse = {
 		status: "",
 		change: []
@@ -16,12 +17,9 @@ function checkCashRegister(price, cash, cid) {
 		["NICKEL", 0.05],
 		["PENNY", 0.01]
 	];
-	
+
 	//calcul de la somme a rendre
 	let sommeARendre = cash - price;
-	console.log("​------------------------------------------------");
-	console.log("​checkCashRegister -> sommeARendre au debut -> ", sommeARendre);
-	console.log("​------------------------------------------------");
 
 	//choix de la monnaie a rendre
 	const makeAChoice = () => {
@@ -54,7 +52,7 @@ function checkCashRegister(price, cash, cid) {
 	};
 
 	checkMyTotal();
-	rendre();
+	//rendre();
 
 	//calcul si la somme total en caisse est suffisante
 	function checkMyTotal() {
