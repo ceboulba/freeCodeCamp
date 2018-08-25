@@ -26,15 +26,13 @@ function checkCashRegister(price, cash, cid) {
   //   const temp = valors.find(valor => valor[1] < sommeARendre);
   //   return temp;
   // };
-  const makeAChoice = () => {
-    const temp = valors.filter(valor => valor[1] < sommeARendre);
-    const enStock = temp.filter(valeur => {
-      const [devise, val] = valeur;
-    })
-    };
-    console.log('makeChoice -> enStock -> ',enStock)
-    return enStock;
-  
+  const makeAChoice = (monnaie) => {
+    const valorsValide = valors
+      .filter(valor => valor[1] <= monnaie)
+      .find(valor => cid.reverse().find(val => val[0] === valor[0] && val[1] > 0));
+      const stockInDrawer = cid.find(val => val[0] === valorsValide[0])
+    return [valorsValide[0], valorsValide[1], stockInDrawer[1]];
+  };
 
   //calcul du sock de la monnaie choisit
   const stock = () => {
@@ -53,9 +51,10 @@ function checkCashRegister(price, cash, cid) {
   const rendre = () => {
     console.log(`on va rendre ${sommeARendre}`);
     let rendu = 0;
-    let stockDispo = makeAChoice();
-
-    console.log("rendre -> stockDispo -> ", stockDispo);
+    let [devise, monnaie, stock] = makeAChoice(sommeARendre);
+    console.log("rendre -> devise -> ", devise);
+    console.log("rendre -> monnaie -> ", monnaie);
+    console.log("rendre -> stock -> ", stock);
   };
 
     //let choix = valor[1];
