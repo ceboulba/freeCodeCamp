@@ -26,7 +26,7 @@ function checkCashRegister(price, cash, cid) {
 
   //choix de la monnaie a rendre
   const makeAChoice = () => {
-    return valors.filter(element => element[1] < sommeARendre).find(val => {
+    return valors.filter(element => element[1] <= sommeARendre).find(val => {
       const [devisePropal, valprop] = val;
       const finded = valorsEnCaisse.find(propal => propal[0] === devisePropal && propal[1] > 0);
       return finded;
@@ -34,11 +34,7 @@ function checkCashRegister(price, cash, cid) {
   }
 
   //calcul du sock de la monnaie choisit
-  const stock = () => {
-    const choice = makeAChoice();
-    const temp = cid.find(valor => valor[0] === choice[0]);
-    return temp;
-  };
+  const stock = (devise) => cid.find(valor => valor[0] === devise).slice(1)
 
   //calcul si la somme total en caisse est suffisante
   function checkMyTotal() {
@@ -51,16 +47,34 @@ function checkCashRegister(price, cash, cid) {
     console.log(`on va rendre ${sommeARendre}`);
     let rendu = 0;
     let choix = makeAChoice();
+    let stockDispo = stock(choix[0])
+    console.log('​---------------------------------');
+    console.log('​rendre -> stockDispo', stockDispo);
+    console.log('​---------------------------------');
+     
+    sommeARendre > 0.00 && stockDispo > 0.00 
+    ? ( ()=> {
+      sommeARendre -= choix[1];
+      rendu += choix[1];
+      stockDispo -= choix[1];
+      sommeARendre =  sommeARendre.toFixed(2)
+    } )()
+    : console.log('OUT')
 
-    console.log("rendre -> choix -> ", choix);
+    reponse.status = "OPEN";
+    reponse.change.push([choix[0], rendu])
+    sommeARendre > 0 ? rendre() : 
+    console.log('​-------------');
+    console.log('​rendre -> sommeARendre => ',sommeARendre );
+    console.log('​-------------');
   };
 
   //let choix = valor[1];
-  // while (enStock > 0 && sommeARendre > 0) {
+ // while (enStock > 0 && sommeARendre > 0) {
   //   sommeARendre -= choix;
   //   enStock -= choix;
   //   rendu += choix;
-  // }
+  // } 
 
   // if (sommeARendre === 0 || enStock === 0) {
   //   reponse.change.push([devise, rendu]);
@@ -99,9 +113,9 @@ checkCashRegister(3.26, 100, [
   ["DIME", 3.1],
   ["QUARTER", 4.25],
   ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],
+  ["FIVE", 55],//55
+  ["TEN", 20],//20
+  ["TWENTY", 60],//60
   ["ONE HUNDRED", 100]
 ]);
 
