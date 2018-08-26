@@ -25,21 +25,13 @@ function checkCashRegister(price, cash, cid) {
   let sommeARendre = cash - price;
 
   //choix de la monnaie a rendre
-  // const makeAChoice = () => {
-  //   const temp = valors.find(valor => valor[1] < sommeARendre);
-  //   return temp;
-  // };
   const makeAChoice = () => {
-    const valorsTemp = valors.filter(valor => valor[1] < sommeARendre);
-    console.log('​------------------');
-    console.log('​makeAChoice -> valorTemp -> ',valorsTemp );
-    console.log('​------------------');
-    const choice = valorsTemp.filter(valor => valorsEnCaisse.find(inDrawer => inDrawer[0] === valor[0] && inDrawer[1] > 0) )
-    
-    console.log('​------------------');
-    console.log('​makeAChoice -> choice ->',choice );
-    console.log('​------------------');
-    };  
+    return valors.filter(element => element[1] < sommeARendre).find(val => {
+      const [devisePropal, valprop] = val;
+      const finded = valorsEnCaisse.find(propal => propal[0] === devisePropal && propal[1] > 0);
+      return finded;
+    });
+  }
 
   //calcul du sock de la monnaie choisit
   const stock = () => {
@@ -58,25 +50,25 @@ function checkCashRegister(price, cash, cid) {
   const rendre = () => {
     console.log(`on va rendre ${sommeARendre}`);
     let rendu = 0;
-    let stockDispo = makeAChoice();
+    let choix = makeAChoice();
 
-    console.log("rendre -> stockDispo -> ", stockDispo);
+    console.log("rendre -> choix -> ", choix);
   };
 
-    //let choix = valor[1];
-    // while (enStock > 0 && sommeARendre > 0) {
-    //   sommeARendre -= choix;
-    //   enStock -= choix;
-    //   rendu += choix;
-    // }
+  //let choix = valor[1];
+  // while (enStock > 0 && sommeARendre > 0) {
+  //   sommeARendre -= choix;
+  //   enStock -= choix;
+  //   rendu += choix;
+  // }
 
-    // if (sommeARendre === 0 || enStock === 0) {
-    //   reponse.change.push([devise, rendu]);
-    //   reponse.status = "OPEN";
-    //   sommeARendre = sommeARendre.toFixed(2);
-    //   console.log("sommeARendre -> ", sommeARendre);
-    //   sommeARendre === 0 ? null : rendre();
-    // }
+  // if (sommeARendre === 0 || enStock === 0) {
+  //   reponse.change.push([devise, rendu]);
+  //   reponse.status = "OPEN";
+  //   sommeARendre = sommeARendre.toFixed(2);
+  //   console.log("sommeARendre -> ", sommeARendre);
+  //   sommeARendre === 0 ? null : rendre();
+  // }
 
   rendre();
 
