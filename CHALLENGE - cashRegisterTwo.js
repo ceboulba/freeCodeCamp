@@ -1,4 +1,3 @@
-//fichierModif
 
 function checkCashRegister(price, cash, cid) {
   //preparation de l'objet à rendre
