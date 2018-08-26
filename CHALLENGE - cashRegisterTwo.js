@@ -1,3 +1,5 @@
+//fichierModif
+
 function checkCashRegister(price, cash, cid) {
   //preparation de l'objet à rendre
   const reponse = {
@@ -53,7 +55,7 @@ function checkCashRegister(price, cash, cid) {
     let rendu = 0;
     let [devise, monnaie, stock] = makeAChoice(sommeARendre);
     console.log("rendre -> devise -> ", devise);
-    console.log("rendre -> monnaie -> ", monnaie);
+    console.log("rendre -> monnaie -> ", devise);
     console.log("rendre -> stock -> ", stock);
   };
 
