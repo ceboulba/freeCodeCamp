@@ -51,26 +51,26 @@ function checkCashRegister(price, cash, cid) {
     console.log('​---------------------------------');
     console.log('​rendre -> stockDispo', stockDispo);
     console.log('​---------------------------------');
-     
-    sommeARendre > 0.00 && stockDispo > 0.00 
-    ? ( ()=> {
-      sommeARendre -= choix[1];
-      rendu += choix[1];
-      stockDispo -= choix[1];
-      sommeARendre =  sommeARendre.toFixed(2)
-    } )()
-    : console.log('OUT')
+
+    sommeARendre > 0.00 && stockDispo > 0.00
+      ? (() => {
+        sommeARendre -= choix[1];
+        rendu += choix[1];
+        stockDispo -= choix[1];
+        sommeARendre = sommeARendre.toFixed(2)
+      })()
+      : console.log('OUT')
 
     reponse.status = "OPEN";
     reponse.change.push([choix[0], rendu])
-    sommeARendre > 0 ? rendre() : 
-    console.log('​-------------');
-    console.log('​rendre -> sommeARendre => ',sommeARendre );
+    sommeARendre > 0 ? rendre() :
+      console.log('​-------------');
+    console.log('​rendre -> sommeARendre => ', sommeARendre);
     console.log('​-------------');
   };
 
   //let choix = valor[1];
- // while (enStock > 0 && sommeARendre > 0) {
+  // while (enStock > 0 && sommeARendre > 0) {
   //   sommeARendre -= choix;
   //   enStock -= choix;
   //   rendu += choix;
