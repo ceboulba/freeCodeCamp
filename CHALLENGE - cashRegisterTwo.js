@@ -26,7 +26,7 @@ function checkCashRegister(price, cash, cid) {
 
   //choix de la monnaie a rendre
   const makeAChoice = () => {
-    return valors.filter(element => element[1] <= sommeARendre).find(val => {
+    return valors.filter(element => element[1] < sommeARendre).find(val => {
       const [devisePropal, valprop] = val;
       const finded = valorsEnCaisse.find(propal => propal[0] === devisePropal && propal[1] > 0);
       return finded;
@@ -43,30 +43,27 @@ function checkCashRegister(price, cash, cid) {
     return totalEnCaisse;
   }
 
+  //function qui rend la monnaie
   const rendre = () => {
-    console.log(`on va rendre ${sommeARendre}`);
-    let rendu = 0;
-    let choix = makeAChoice();
-    let stockDispo = stock(choix[0])
-    console.log('​---------------------------------');
-    console.log('​rendre -> stockDispo', stockDispo);
-    console.log('​---------------------------------');
+      console.log(`on va rendre ${sommeARendre}`);
+      let rendu = 0;
+      const [deviseChoisit, valeurChoisit] = makeAChoice()
+      let stockDispo = stock(deviseChoisit)
 
-    sommeARendre > 0.00 && stockDispo > 0.00
-      ? (() => {
-        sommeARendre -= choix[1];
-        rendu += choix[1];
-        stockDispo -= choix[1];
+      while (stockDispo > 0 && sommeARendre > 0 && sommeARendre >= valeurChoisit) {
+        stockDispo -= valeurChoisit;
+        sommeARendre -= valeurChoisit;
         sommeARendre = sommeARendre.toFixed(2)
-      })()
-      : console.log('OUT')
-
-    reponse.status = "OPEN";
-    reponse.change.push([choix[0], rendu])
-    sommeARendre > 0 ? rendre() :
-      console.log('​-------------');
-    console.log('​rendre -> sommeARendre => ', sommeARendre);
+        rendu += valeurChoisit;
+      }
+    
     console.log('​-------------');
+    console.log('​rendre -> rendu => ',rendu );
+    console.log('​-------------');
+
+    sommeARendre > 0
+      ? rendre()
+      : null
   };
 
   //let choix = valor[1];
