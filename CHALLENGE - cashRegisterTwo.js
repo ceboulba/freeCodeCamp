@@ -1,7 +1,6 @@
-function checkCashRegister(price, cash, cid) {
-  //retourne cid pour le ranger du + au - grand
-  const valorsEnCaisse = cid.reverse();
+//fichierModif
 
+function checkCashRegister(price, cash, cid) {
   //preparation de l'objet à rendre
   const reponse = {
     status: "",
@@ -25,16 +24,24 @@ function checkCashRegister(price, cash, cid) {
   let sommeARendre = cash - price;
 
   //choix de la monnaie a rendre
-  const makeAChoice = () => {
-    return valors.filter(element => element[1] < sommeARendre).find(val => {
-      const [devisePropal, valprop] = val;
-      const finded = valorsEnCaisse.find(propal => propal[0] === devisePropal && propal[1] > 0);
-      return finded;
-    });
-  }
+  // const makeAChoice = () => {
+  //   const temp = valors.find(valor => valor[1] < sommeARendre);
+  //   return temp;
+  // };
+  const makeAChoice = (monnaie) => {
+    const valorsValide = valors
+      .filter(valor => valor[1] <= monnaie)
+      .find(valor => cid.reverse().find(val => val[0] === valor[0] && val[1] > 0));
+      const stockInDrawer = cid.find(val => val[0] === valorsValide[0])
+    return [valorsValide[0], valorsValide[1], stockInDrawer[1]];
+  };
 
   //calcul du sock de la monnaie choisit
-  const stock = (devise) => cid.find(valor => valor[0] === devise).slice(1)
+  const stock = () => {
+    const choice = makeAChoice();
+    const temp = cid.find(valor => valor[0] === choice[0]);
+    return temp;
+  };
 
   //calcul si la somme total en caisse est suffisante
   function checkMyTotal() {
@@ -43,43 +50,29 @@ function checkCashRegister(price, cash, cid) {
     return totalEnCaisse;
   }
 
-  //function qui rend la monnaie
   const rendre = () => {
-      console.log(`on va rendre ${sommeARendre}`);
-      let rendu = 0;
-      const [deviseChoisit, valeurChoisit] = makeAChoice()
-      let stockDispo = stock(deviseChoisit)
-
-      while (stockDispo > 0 && sommeARendre > 0 && sommeARendre >= valeurChoisit) {
-        stockDispo -= valeurChoisit;
-        sommeARendre -= valeurChoisit;
-        sommeARendre = sommeARendre.toFixed(2)
-        rendu += valeurChoisit;
-      }
-    
-    console.log('​-------------');
-    console.log('​rendre -> rendu => ',rendu );
-    console.log('​-------------');
-
-    sommeARendre > 0
-      ? rendre()
-      : null
+    console.log(`on va rendre ${sommeARendre}`);
+    let rendu = 0;
+    let [devise, monnaie, stock] = makeAChoice(sommeARendre);
+    console.log("rendre -> devise -> ", devise);
+    console.log("rendre -> monnaie -> ", devise);
+    console.log("rendre -> stock -> ", stock);
   };
 
-  //let choix = valor[1];
-  // while (enStock > 0 && sommeARendre > 0) {
-  //   sommeARendre -= choix;
-  //   enStock -= choix;
-  //   rendu += choix;
-  // } 
+    //let choix = valor[1];
+    // while (enStock > 0 && sommeARendre > 0) {
+    //   sommeARendre -= choix;
+    //   enStock -= choix;
+    //   rendu += choix;
+    // }
 
-  // if (sommeARendre === 0 || enStock === 0) {
-  //   reponse.change.push([devise, rendu]);
-  //   reponse.status = "OPEN";
-  //   sommeARendre = sommeARendre.toFixed(2);
-  //   console.log("sommeARendre -> ", sommeARendre);
-  //   sommeARendre === 0 ? null : rendre();
-  // }
+    // if (sommeARendre === 0 || enStock === 0) {
+    //   reponse.change.push([devise, rendu]);
+    //   reponse.status = "OPEN";
+    //   sommeARendre = sommeARendre.toFixed(2);
+    //   console.log("sommeARendre -> ", sommeARendre);
+    //   sommeARendre === 0 ? null : rendre();
+    // }
 
   rendre();
 
@@ -110,9 +103,9 @@ checkCashRegister(3.26, 100, [
   ["DIME", 3.1],
   ["QUARTER", 4.25],
   ["ONE", 90],
-  ["FIVE", 55],//55
-  ["TEN", 20],//20
-  ["TWENTY", 60],//60
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
   ["ONE HUNDRED", 100]
 ]);
 
