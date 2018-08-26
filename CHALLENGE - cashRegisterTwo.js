@@ -1,4 +1,7 @@
 function checkCashRegister(price, cash, cid) {
+  //retourne cid pour le ranger du + au - grand
+  const valorsEnCaisse = cid.reverse();
+
   //preparation de l'objet à rendre
   const reponse = {
     status: "",
@@ -27,14 +30,16 @@ function checkCashRegister(price, cash, cid) {
   //   return temp;
   // };
   const makeAChoice = () => {
-    const temp = valors.filter(valor => valor[1] < sommeARendre);
-    const enStock = temp.filter(valeur => {
-      const [devise, val] = valeur;
-    })
-    };
-    console.log('makeChoice -> enStock -> ',enStock)
-    return enStock;
-  
+    const valorsTemp = valors.filter(valor => valor[1] < sommeARendre);
+    console.log('​------------------');
+    console.log('​makeAChoice -> valorTemp -> ',valorsTemp );
+    console.log('​------------------');
+    const choice = valorsTemp.filter(valor => valorsEnCaisse.find(inDrawer => inDrawer[0] === valor[0] && inDrawer[1] > 0) )
+    
+    console.log('​------------------');
+    console.log('​makeAChoice -> choice ->',choice );
+    console.log('​------------------');
+    };  
 
   //calcul du sock de la monnaie choisit
   const stock = () => {
