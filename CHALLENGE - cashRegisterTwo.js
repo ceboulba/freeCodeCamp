@@ -27,13 +27,28 @@ function checkCashRegister(price, cash, cid) {
   //   const temp = valors.find(valor => valor[1] < sommeARendre);
   //   return temp;
   // };
-  const makeAChoice = () => {
-    const valorsValide = valors
-      .filter(valor => valor[1] <= sommeARendre)
-      .find(valor => cid.reverse().find(val => val[0] === valor[0] && val[1] > 0));
-      const stockInDrawer = cid.find(val => val[0] === valorsValide[0])
-    return [valorsValide[0], valorsValide[1], stockInDrawer[1]];
-  };
+  sommeARendre = 0
+
+  const makeAChoice = () => valors.filter(valor => valor[1] <= sommeARendre)
+    .find(element => cid.find(cidElement => cidElement[0] === element[0] && cidElement[1] > 0))
+
+    const check = () => {
+      const essais = makeAChoice()
+      if(essais) {
+        return essais
+      }       
+    } 
+      
+    console.log('​------------------------------------');
+    console.log('​checkCashRegister -> essais', check());
+    console.log('​------------------------------------');   
+
+
+  function compare(valor, cidValor) {
+    if (valor[0] === cidValor[0] && cidValor > 0) {
+      return [valor[0], valor[1], cidValor[1]]
+    }
+  }
 
   //calcul si la somme total en caisse est suffisante
   function checkMyTotal() {
@@ -44,45 +59,51 @@ function checkCashRegister(price, cash, cid) {
 
   const rendre = () => {
     console.log(`on va rendre ${sommeARendre}`);
-    let rendu = 0;
-    let [devise, monnaie, stock] = makeAChoice();
-    console.log("rendre -> devise -> ", devise);
-    console.log("rendre -> monnaie -> ", monnaie);
-    console.log("rendre -> stock -> ", stock);
-    
-    while (sommeARendre > 0 && stock > 0 && sommeARendre >= monnaie) {
-      sommeARendre -= monnaie;
-      stock -= monnaie;
-      rendu += monnaie;
-      sommeARendre = sommeARendre.toFixed(2)
-    }
-    reponse.status='OPEN';
-    reponse.change.push([devise, rendu])
-    console.log(`
-    on va rendre ${sommeARendre} 
-    et on vient de rendre ${rendu}`);
+    if (sommeARendre > 0) {
 
-    sommeARendre <= 0
-    ? null
-    : rendre()
+      let rendu = 0;
+      let [devise, monnaie] = check();
+      let stock = cid.find(val => val[0] === devise);
+      console.log("rendre -> devise -> ", devise);
+      console.log("rendre -> monnaie -> ", monnaie);
+      console.log("rendre -> stock -> ", stock);
+
+      while (sommeARendre > 0 && stock > 0 && sommeARendre > monnaie) {
+        sommeARendre -= monnaie;
+        stock -= monnaie;
+        rendu += monnaie;
+        sommeARendre = sommeARendre.toFixed(2)
+      }
+      reponse.status = 'OPEN';
+      reponse.change.push([devise, rendu])
+      console.log(`
+        on va rendre ${sommeARendre} 
+        et on vient de rendre ${rendu}`);
+    } else {
+      return
+    }
+
+    sommeARendre > 0
+      ? rendre()
+      : null
   };
 
-    //let choix = valor[1];
-    // while (enStock > 0 && sommeARendre > 0) {
-    //   sommeARendre -= choix;
-    //   enStock -= choix;
-    //   rendu += choix;
-    // }
+  //let choix = valor[1];
+  // while (enStock > 0 && sommeARendre > 0) {
+  //   sommeARendre -= choix;
+  //   enStock -= choix;
+  //   rendu += choix;
+  // }
 
-    // if (sommeARendre === 0 || enStock === 0) {
-    //   reponse.change.push([devise, rendu]);
-    //   reponse.status = "OPEN";
-    //   sommeARendre = sommeARendre.toFixed(2);
-    //   console.log("sommeARendre -> ", sommeARendre);
-    //   sommeARendre === 0 ? null : rendre();
-    // }
+  // if (sommeARendre === 0 || enStock === 0) {
+  //   reponse.change.push([devise, rendu]);
+  //   reponse.status = "OPEN";
+  //   sommeARendre = sommeARendre.toFixed(2);
+  //   console.log("sommeARendre -> ", sommeARendre);
+  //   sommeARendre === 0 ? null : rendre();
+  // }
 
-  rendre();
+  //rendre();
 
   console.log("​------------------------");
   console.log("​checkCashRegister -> reponse -> ", reponse);
@@ -113,7 +134,7 @@ checkCashRegister(3.26, 100, [
   ["ONE", 90],
   ["FIVE", 55],
   ["TEN", 20],
-  ["TWENTY", 60],
+  ["TWENTY", 60],//60
   ["ONE HUNDRED", 100]
 ]);
 
