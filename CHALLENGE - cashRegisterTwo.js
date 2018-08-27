@@ -27,19 +27,12 @@ function checkCashRegister(price, cash, cid) {
   //   const temp = valors.find(valor => valor[1] < sommeARendre);
   //   return temp;
   // };
-  const makeAChoice = (monnaie) => {
+  const makeAChoice = () => {
     const valorsValide = valors
-      .filter(valor => valor[1] <= monnaie)
+      .filter(valor => valor[1] <= sommeARendre)
       .find(valor => cid.reverse().find(val => val[0] === valor[0] && val[1] > 0));
       const stockInDrawer = cid.find(val => val[0] === valorsValide[0])
     return [valorsValide[0], valorsValide[1], stockInDrawer[1]];
-  };
-
-  //calcul du sock de la monnaie choisit
-  const stock = () => {
-    const choice = makeAChoice();
-    const temp = cid.find(valor => valor[0] === choice[0]);
-    return temp;
   };
 
   //calcul si la somme total en caisse est suffisante
@@ -52,10 +45,26 @@ function checkCashRegister(price, cash, cid) {
   const rendre = () => {
     console.log(`on va rendre ${sommeARendre}`);
     let rendu = 0;
-    let [devise, monnaie, stock] = makeAChoice(sommeARendre);
+    let [devise, monnaie, stock] = makeAChoice();
     console.log("rendre -> devise -> ", devise);
-    console.log("rendre -> monnaie -> ", devise);
+    console.log("rendre -> monnaie -> ", monnaie);
     console.log("rendre -> stock -> ", stock);
+    
+    while (sommeARendre > 0 && stock > 0 && sommeARendre >= monnaie) {
+      sommeARendre -= monnaie;
+      stock -= monnaie;
+      rendu += monnaie;
+      sommeARendre = sommeARendre.toFixed(2)
+    }
+    reponse.status='OPEN';
+    reponse.change.push([devise, rendu])
+    console.log(`
+    on va rendre ${sommeARendre} 
+    et on vient de rendre ${rendu}`);
+
+    sommeARendre <= 0
+    ? null
+    : rendre()
   };
 
     //let choix = valor[1];
@@ -121,5 +130,14 @@ checkCashRegister(3.26, 100, [
 // Remember to use Read-Search-Ask if you get stuck. Try to pair program. Write your own code.
 
 // EXEMPLE:
-// checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
-// should return {status: "OPEN", change: [["QUARTER", 0.5]]}
+// checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]) should return an object.
+
+// checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]) should return {status: "OPEN", change: [["QUARTER", 0.5]]}.
+
+// checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]) should return {status: "OPEN", change: [["TWENTY", 60], ["TEN", 20], ["FIVE", 15], ["ONE", 1], ["QUARTER", 0.5], ["DIME", 0.2], ["PENNY", 0.04]]}.
+
+// checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]) should return {status: "INSUFFICIENT_FUNDS", change: []}.
+
+// checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]) should return {status: "INSUFFICIENT_FUNDS", change: []}.
+
+// checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]) should return {status: "CLOSED", change: [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]}.
