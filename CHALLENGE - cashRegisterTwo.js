@@ -23,10 +23,6 @@ function checkCashRegister(price, cash, cid) {
   let sommeARendre = cash - price;
 
   //choix de la monnaie a rendre
-  // const makeAChoice = () => {
-  //   const temp = valors.find(valor => valor[1] < sommeARendre);
-  //   return temp;
-  // };
   const makeAChoice = (monnaie) => {
     const valorsValide = valors
       .filter(valor => valor[1] <= monnaie)
