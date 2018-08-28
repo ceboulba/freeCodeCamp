@@ -46,13 +46,12 @@ function checkCashRegister(price, cash, cid) {
     let [devise, monnaie, stock] = makeAChoice();
     const num = cid.findIndex( val => val[0] === devise)
 
-
     console.log("rendre -> devise -> ", devise);
     console.log("rendre -> monnaie -> ", monnaie);
     console.log("rendre -> stock -> ", stock);
     console.log('rendre => num => ',num)
 
-    if (sommeARendre > 0 && stock > 0) {
+    while (sommeARendre > 0 && stock >0 ) {
       sommeARendre -= monnaie;
       rendu += monnaie;
       sommeARendre = sommeARendre.toFixed(2);
