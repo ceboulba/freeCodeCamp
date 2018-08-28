@@ -1,5 +1,5 @@
 
-function checkCashRegister (price, cash, cid) {
+function checkCashRegister(price, cash, cid) {
   // preparation de l'objet à rendre
   const reponse = {
     status: '',
@@ -28,37 +28,37 @@ function checkCashRegister (price, cash, cid) {
   }
 
   // calcul si la somme total en caisse est suffisante
-  function checkMyTotal () {
-    const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2);
-    console.log('totalEnCaisse -> ', totalEnCaisse);
-    return totalEnCaisse
-  }
+  // function checkMyTotal () {
+  //   const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2);
+  //   console.log('totalEnCaisse -> ', totalEnCaisse);
+  //   return totalEnCaisse
+  // }
 
   const rendre = () => {
     console.log(`on va rendre ${sommeARendre}`)
-    if (sommeARendre > 0) {
-      let rendu = 0
-      const [devise, monnaie] = choisir()
-      let stock = cid.find(val => val[0] === devise)
-      console.log('rendre -> devise -> ', devise)
-      console.log('rendre -> monnaie -> ', monnaie)
-      console.log('rendre -> stock -> ', stock)
+    let rendu = 0
+    const [devise, monnaie] = choisir()
+    let [, stock] = cid.find(val => val[0] === devise)
+    console.log('rendre -> devise -> ', devise)
+    console.log('rendre -> monnaie -> ', monnaie)
+    console.log('rendre -> stock -> ', stock)
 
-      while (sommeARendre > 0 && stock > 0 && sommeARendre > monnaie) {
-        sommeARendre -= monnaie
-        stock -= monnaie
-        rendu += monnaie
-        sommeARendre = sommeARendre.toFixed(2)
-      }
-      reponse.status = 'OPEN'
-      reponse.change.push([devise, rendu])
-      console.log(`
-        on va rendre ${sommeARendre} 
-        et on vient de rendre ${rendu}`)
-    } else {
-
+    while (sommeARendre > 0 && stock > 0) {
+      sommeARendre -= monnaie
+      stock -= monnaie
+      rendu += monnaie
+      sommeARendre = sommeARendre.toFixed(2)
     }
 
+    reponse.status = 'OPEN'
+    reponse.change.push([devise, rendu])
+    console.log(`
+        on va rendre ${sommeARendre} 
+        et on vient de rendre ${rendu}`)
+
+    if (sommeARendre > 0) {
+      rendre()
+    }
   }
 
   rendre()
