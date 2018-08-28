@@ -1,5 +1,5 @@
 
-function checkCashRegister (price, cash, cid) {
+function checkCashRegister(price, cash, cid) {
   // preparation de l'objet à rendre
   const reponse = {
     status: '',
@@ -27,13 +27,6 @@ function checkCashRegister (price, cash, cid) {
     return valorsValides || console.log('plus de valeur dispo')
   }
 
-  // calcul si la somme total en caisse est suffisante
-  // function checkMyTotal () {
-  //   const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2);
-  //   console.log('totalEnCaisse -> ', totalEnCaisse);
-  //   return totalEnCaisse
-  // }
-
   const rendre = () => {
     console.log(`on va rendre ${sommeARendre}`)
     let rendu = 0
@@ -44,7 +37,7 @@ function checkCashRegister (price, cash, cid) {
     console.log('rendre -> monnaie -> ', monnaie)
     console.log('rendre -> stock -> ', stock)
     console.log('rendre -> stock -> index ', index)
-    
+
     while (sommeARendre > 0 && stock > 0 && sommeARendre >= monnaie) {
       sommeARendre -= monnaie
       stock -= monnaie
@@ -64,7 +57,21 @@ function checkCashRegister (price, cash, cid) {
     }
   }
 
-  rendre()
+  // calcul si la somme total en caisse est suffisante
+  function checkMyTotal () {
+    const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2)
+    console.log('totalEnCaisse -> ', totalEnCaisse)
+    return totalEnCaisse > sommeARendre
+      ? rendre()
+      : pasAssez()
+  }
+
+  function pasAssez () {
+    reponse.status = 'INSUFFICIENT_FUNDS'
+    console.log('On est ruiné')
+  }
+
+  checkMyTotal()
 
   console.log('​------------------------')
   console.log('​checkCashRegister -> reponse -> ', reponse)
@@ -98,6 +105,10 @@ checkCashRegister(3.26, 100, [
   ['TWENTY', 60], // 60
   ['ONE HUNDRED', 100]
 ])
+
+// ///////////////////  APPEL DE L'APP  /////////////////////
+
+checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
 
 // NSTRUCTIONS :
 
