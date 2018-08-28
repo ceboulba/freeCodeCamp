@@ -27,10 +27,14 @@ function checkCashRegister(price, cash, cid) {
   //   const temp = valors.find(valor => valor[1] < sommeARendre);
   //   return temp;
   // };
-  sommeARendre = 0
 
   const makeAChoice = () => valors.filter(valor => valor[1] <= sommeARendre)
     .find(element => cid.find(cidElement => cidElement[0] === element[0] && cidElement[1] > 0))
+
+    const choisir = () => {
+      valors.filter(valor => valor[1] < sommeARendre)
+    }
+    console.log('choisir => ',choisir())
 
     const check = () => {
       const essais = makeAChoice()
