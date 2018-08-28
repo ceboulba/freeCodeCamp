@@ -39,14 +39,17 @@ function checkCashRegister (price, cash, cid) {
     let rendu = 0
     const [devise, monnaie] = choisir()
     let [, stock] = cid.find(val => val[0] === devise)
+    const index = cid.findIndex(element => element[0] === devise)
     console.log('rendre -> devise -> ', devise)
     console.log('rendre -> monnaie -> ', monnaie)
     console.log('rendre -> stock -> ', stock)
-
-    while (sommeARendre > 0 && stock > 0) {
+    console.log('rendre -> stock -> index ', index)
+    
+    while (sommeARendre > 0 && stock > 0 && sommeARendre >= monnaie) {
       sommeARendre -= monnaie
       stock -= monnaie
       rendu += monnaie
+      cid[index][1] -= monnaie
       sommeARendre = sommeARendre.toFixed(2)
     }
 
