@@ -1,5 +1,5 @@
 
-function checkCashRegister(price, cash, cid) {
+function checkCashRegister (price, cash, cid) {
   // preparation de l'objet à rendre
   const reponse = {
     status: '',
