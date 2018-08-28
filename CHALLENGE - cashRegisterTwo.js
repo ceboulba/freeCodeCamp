@@ -1,121 +1,75 @@
 
-function checkCashRegister(price, cash, cid) {
-  //preparation de l'objet à rendre
+function checkCashRegister (price, cash, cid) {
+  // preparation de l'objet à rendre
   const reponse = {
-    status: "",
+    status: '',
     change: []
-  };
-
-  //tableau des valeurs
-  const valors = [
-    ["ONE HUNDRED", 100],
-    ["TWENTY", 20],
-    ["TEN", 10],
-    ["FIVE", 5],
-    ["ONE", 1],
-    ["QUARTER", 0.25],
-    ["DIME", 0.1],
-    ["NICKEL", 0.05],
-    ["PENNY", 0.01]
-  ];
-
-  //calcul de la somme a rendre de base
-  let sommeARendre = cash - price;
-
-  //choix de la monnaie a rendre
-  // const makeAChoice = () => {
-  //   const temp = valors.find(valor => valor[1] < sommeARendre);
-  //   return temp;
-  // };
-
-  const makeAChoice = () => valors.filter(valor => valor[1] <= sommeARendre)
-    .find(element => cid.find(cidElement => cidElement[0] === element[0] && cidElement[1] > 0))
-
-    const choisir = () => {
-      valors.filter(valor => valor[1] < sommeARendre)
-    }
-    console.log('choisir => ',choisir())
-
-    const check = () => {
-      const essais = makeAChoice()
-      if(essais) {
-        return essais
-      }       
-    } 
-      
-    console.log('​------------------------------------');
-    console.log('​checkCashRegister -> essais', check());
-    console.log('​------------------------------------');   
-
-
-  function compare(valor, cidValor) {
-    if (valor[0] === cidValor[0] && cidValor > 0) {
-      return [valor[0], valor[1], cidValor[1]]
-    }
   }
 
-  //calcul si la somme total en caisse est suffisante
-  function checkMyTotal() {
-    let totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2);
-    console.log("totalEnCaisse -> ", totalEnCaisse);
-    return totalEnCaisse;
+  // tableau des valeurs
+  const valors = [
+    ['ONE HUNDRED', 100],
+    ['TWENTY', 20],
+    ['TEN', 10],
+    ['FIVE', 5],
+    ['ONE', 1],
+    ['QUARTER', 0.25],
+    ['DIME', 0.1],
+    ['NICKEL', 0.05],
+    ['PENNY', 0.01]]
+  // calcul de la somme a rendre de base
+  let sommeARendre = cash - price
+
+  // choix de la monnaie a rendre
+  const choisir = () => {
+    const valorsValides = valors.filter(valor => valor[1] < sommeARendre)
+      .find(valor => cid.find(val => val[0] === valor[0] && val[1] > 0))
+    return valorsValides || console.log('plus de valeur dispo')
+  }
+
+  // calcul si la somme total en caisse est suffisante
+  function checkMyTotal () {
+    const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2);
+    console.log('totalEnCaisse -> ', totalEnCaisse);
+    return totalEnCaisse
   }
 
   const rendre = () => {
-    console.log(`on va rendre ${sommeARendre}`);
+    console.log(`on va rendre ${sommeARendre}`)
     if (sommeARendre > 0) {
-
-      let rendu = 0;
-      let [devise, monnaie] = check();
-      let stock = cid.find(val => val[0] === devise);
-      console.log("rendre -> devise -> ", devise);
-      console.log("rendre -> monnaie -> ", monnaie);
-      console.log("rendre -> stock -> ", stock);
+      let rendu = 0
+      const [devise, monnaie] = choisir()
+      let stock = cid.find(val => val[0] === devise)
+      console.log('rendre -> devise -> ', devise)
+      console.log('rendre -> monnaie -> ', monnaie)
+      console.log('rendre -> stock -> ', stock)
 
       while (sommeARendre > 0 && stock > 0 && sommeARendre > monnaie) {
-        sommeARendre -= monnaie;
-        stock -= monnaie;
-        rendu += monnaie;
+        sommeARendre -= monnaie
+        stock -= monnaie
+        rendu += monnaie
         sommeARendre = sommeARendre.toFixed(2)
       }
-      reponse.status = 'OPEN';
+      reponse.status = 'OPEN'
       reponse.change.push([devise, rendu])
       console.log(`
         on va rendre ${sommeARendre} 
-        et on vient de rendre ${rendu}`);
+        et on vient de rendre ${rendu}`)
     } else {
-      return
+
     }
 
-    sommeARendre > 0
-      ? rendre()
-      : null
-  };
+  }
 
-  //let choix = valor[1];
-  // while (enStock > 0 && sommeARendre > 0) {
-  //   sommeARendre -= choix;
-  //   enStock -= choix;
-  //   rendu += choix;
-  // }
+  rendre()
 
-  // if (sommeARendre === 0 || enStock === 0) {
-  //   reponse.change.push([devise, rendu]);
-  //   reponse.status = "OPEN";
-  //   sommeARendre = sommeARendre.toFixed(2);
-  //   console.log("sommeARendre -> ", sommeARendre);
-  //   sommeARendre === 0 ? null : rendre();
-  // }
-
-  //rendre();
-
-  console.log("​------------------------");
-  console.log("​checkCashRegister -> reponse -> ", reponse);
-  console.log("​------------------------");
-  return reponse;
+  console.log('​------------------------')
+  console.log('​checkCashRegister -> reponse -> ', reponse)
+  console.log('​------------------------')
+  return reponse
 }
 
-/////////////////////  APPEL DE L'APP  /////////////////////
+// ///////////////////  APPEL DE L'APP  /////////////////////
 // checkCashRegister(19.5, 20, [
 //   ["PENNY", 1.01],
 //   ["NICKEL", 2.05],
@@ -128,19 +82,19 @@ function checkCashRegister(price, cash, cid) {
 //   ["ONE HUNDRED", 100]
 // ]);
 
-/////////////////////  APPEL DE L'APP  /////////////////////
+// ///////////////////  APPEL DE L'APP  /////////////////////
 
 checkCashRegister(3.26, 100, [
-  ["PENNY", 1.01],
-  ["NICKEL", 2.05],
-  ["DIME", 3.1],
-  ["QUARTER", 4.25],
-  ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],//60
-  ["ONE HUNDRED", 100]
-]);
+  ['PENNY', 1.01],
+  ['NICKEL', 2.05],
+  ['DIME', 3.1],
+  ['QUARTER', 4.25],
+  ['ONE', 90],
+  ['FIVE', 55],
+  ['TEN', 20],
+  ['TWENTY', 60], // 60
+  ['ONE HUNDRED', 100]
+])
 
 // NSTRUCTIONS :
 

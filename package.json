@@ -1,0 +1,29 @@
+{
+  "name": "freeCodeCamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "CHALLENGE - Caesars Cipher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceboulba/freeCodeCamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceboulba/freeCodeCamp/issues"
+  },
+  "homepage": "https://github.com/ceboulba/freeCodeCamp#readme",
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.1.0"
+  }
+}
