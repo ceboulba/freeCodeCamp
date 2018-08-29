@@ -23,7 +23,7 @@ function checkCashRegister (price, cash, cid) {
 
   // choix de la monnaie a rendre
   const choisir = () => {
-    const valorsValides = valors.filter(valor => valor[1] < sommeARendre)
+    const valorsValides = valors.filter(valor => valor[1] <= sommeARendre)
       .find(valor => cid.find(val => val[0] === valor[0] && val[1] > 0))
     return valorsValides || console.log('plus de valeur dispo')
   }
@@ -58,14 +58,25 @@ function checkCashRegister (price, cash, cid) {
     }
   }
 
-  // calcul si la somme total en caisse est suffisante
+  // // calcul si la somme total en caisse est suffisante
+
   function checkMyTotal () {
     const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2)
     console.log('totalEnCaisse -> ', totalEnCaisse)
+    console.log('sommeARendre -> ', sommeARendre)
     return totalEnCaisse > sommeARendre
       ? rendre()
       : pasAssez()
   }
+
+  // function checkMyTotal () {
+  //   const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2)
+  //   console.log('totalEnCaisse -> ', totalEnCaisse)
+  //   console.log('sommeARendre -> ', sommeARendre)
+  //   return totalEnCaisse > sommeARendre
+  //     ? rendre()
+  //     : pasAssez()
+  // }
 
   function pasAssez () {
     reponse.status = 'INSUFFICIENT_FUNDS'
@@ -81,17 +92,17 @@ function checkCashRegister (price, cash, cid) {
 }
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
-// checkCashRegister(19.5, 20, [
-//   ["PENNY", 1.01],
-//   ["NICKEL", 2.05],
-//   ["DIME", 3.1],
-//   ["QUARTER", 4.25],
-//   ["ONE", 90],
-//   ["FIVE", 55],
-//   ["TEN", 20],
-//   ["TWENTY", 60],
-//   ["ONE HUNDRED", 100]
-// ]);
+checkCashRegister(19.5, 20, [
+  ['PENNY', 1.01],
+  ['NICKEL', 2.05],
+  ['DIME', 3.1],
+  ['QUARTER', 4.25],
+  ['ONE', 90],
+  ['FIVE', 55],
+  ['TEN', 20],
+  ['TWENTY', 60],
+  ['ONE HUNDRED', 100]
+])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 
@@ -110,6 +121,10 @@ checkCashRegister(3.26, 100, [
 // ///////////////////  APPEL DE L'APP  /////////////////////
 
 checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
+
+// ///////////////////  APPEL DE L'APP  /////////////////////
+
+checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 1], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
 
 // NSTRUCTIONS :
 
