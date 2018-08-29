@@ -17,6 +17,7 @@ function checkCashRegister (price, cash, cid) {
     ['DIME', 0.1],
     ['NICKEL', 0.05],
     ['PENNY', 0.01]]
+
   // calcul de la somme a rendre de base
   let sommeARendre = cash - price
 
