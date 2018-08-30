@@ -1,6 +1,4 @@
-
-function checkCashRegister(price, cash, cid) {
-
+function checkCashRegister (price, cash, cid) {
   // preparation de l'objet à rendre
   const reponse = {
     status: '',
@@ -26,11 +24,6 @@ function checkCashRegister(price, cash, cid) {
   const choisir = () => {
     const valorsValides = valors.filter(valor => valor[1] <= sommeARendre)
       .find(valor => cid.find(val => val[0] === valor[0] && val[1] > 0))
-
-    // console.log('​----------------------------------------')
-    // console.log('​choisir -> valorsValides', valorsValides)
-    // console.log('​----------------------------------------')
-
     return valorsValides || pasAssez()
   }
 
@@ -70,7 +63,7 @@ function checkCashRegister(price, cash, cid) {
     reponse.status = 'OPEN'
     reponse.change.push([devise, rendu])
     // console.log(`
-    //     on va rendre ${sommeARendre} 
+    //     on va rendre ${sommeARendre}
     //     et on vient de rendre ${rendu}`)
 
     if (sommeARendre > 0) {
@@ -85,7 +78,7 @@ function checkCashRegister(price, cash, cid) {
     // console.log('totalEnCaisse -> ', totalEnCaisse)
     // console.log('sommeARendre -> ', sommeARendre)
     return totalEnCaisse >= sommeARendre
-      ? console.log('') //rendre()
+      ? console.log('') // rendre()
       : pasAssez()
   }
 
