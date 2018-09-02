@@ -18,7 +18,7 @@ function checkCashRegister(price, cash, cid) {
     ["PENNY", 0.01]
   ];
 
-  const cashInDrawer = cid.reverse();
+  let cashInDrawer = cid.reverse();
 
   // calcul de la somme a rendre de base  //
   let sommeARendre = cash - price;
@@ -50,7 +50,15 @@ function checkCashRegister(price, cash, cid) {
   }
 
   function rendre() {
-    console.log("inRendre");
+    let rendu = 0;
+    const validValor = valors.find(valor => valor[1] <= sommeARendre);
+    console.log("rendre -> validValor", validValor);
+
+    const index = cashInDrawer.forEach((data, i) => console.log('date => ', data[0]))
+
+    console.log("index => ", index);
+    reponse.status = "OPEN";
+    reponse.change.push("elem");
   }
 
   function pasAssez() {
@@ -82,18 +90,6 @@ checkCashRegister(19.5, 20, [
   ["ONE HUNDRED", 100]
 ]);
 
-// ///////////////////  APPEL DE L'APP  /////////////////////
-// checkCashRegister(3.26, 100, [
-//   ['PENNY', 1.01],
-//   ['NICKEL', 2.05],
-//   ['DIME', 3.1],
-//   ['QUARTER', 4.25],
-//   ['ONE', 90],
-//   ['FIVE', 55],
-//   ['TEN', 20],
-//   ['TWENTY', 60],
-//   ['ONE HUNDRED', 100]
-// ])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 // checkCashRegister(19.5, 20, [
