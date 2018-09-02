@@ -31,43 +31,26 @@ function checkCashRegister(price, cash, cid) {
       ? egal()
       : totalEnCaisse(cid) < sommeARendre
         ? pasAssez()
-        : rendre();
+        : renderPossible() > sommeARendre
+          ? rendre()
+          : pasAssez();
   };
 
   function renderPossible() {
     const valide = valors.filter(valor => valor[1] <= sommeARendre);
-    //console.log('valide => ', valide)
     const arr = [];
     cashInDrawer.forEach(val =>
       valide.forEach(valor => {
-        // console.log(`val => ${val} valor => ${valor}`);
         if (val[0] === valor[0] && val[1] > 0) {
-          arr.push(val)
+          arr.push(val);
         }
       })
     );
-    //console.log("arr => ", arr);
-    return arr
+    return totalEnCaisse(arr).toFixed(2);
   }
-  const good = renderPossible();
-  console.log('good => ', good)
-
-  // function renderPossible() {
-  //   const valide = totalEnCaisse(cashInDrawer.filter(valor => valors.filter(cidValor => cidValor[0] === valor[0] && valor[1] <= sommeARendre)))
-  //   console.log('valide => ', valide)
-  //  return valide > sommeARendre
-  //  ? true : false
-  // }
-  // console.log('renderPossible => ', renderPossible())
 
   function rendre() {
     console.log("inRendre");
-  }
-
-  //choisir()
-
-  function videCaisse(valor, cidValor) {
-    console.log("inVideCaisse");
   }
 
   function pasAssez() {
@@ -81,23 +64,23 @@ function checkCashRegister(price, cash, cid) {
     reponse.change.push(...cid.reverse());
     return reponse;
   }
-
+  choisir();
   // console.log('​checkCashRegister -> reponse -> ', reponse)
   return reponse;
 }
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 checkCashRegister(19.5, 20, [
-  ['PENNY', 1.01],
-  ['NICKEL', 2.05],
-  ['DIME', 3.1],
-  ['QUARTER', 4.25],
-  ['ONE', 90],
-  ['FIVE', 55],
-  ['TEN', 20],
-  ['TWENTY', 60],
-  ['ONE HUNDRED', 100]
-])
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+]);
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 // checkCashRegister(3.26, 100, [
