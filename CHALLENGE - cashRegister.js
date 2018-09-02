@@ -24,61 +24,38 @@ function checkCashRegister(price, cash, cid) {
   let sommeARendre = cash - price
 
   // totalEnCaisse
-  const totalEnCaisse = cid.reduce((acc, curr) => acc + curr[1], 0)
+  const totalEnCaisse = (arr) => arr.reduce((acc, curr) => acc + curr[1], 0)
 
   const choisir = () => {
-    return totalEnCaisse === sommeARendre
+    return totalEnCaisse(cid) === sommeARendre
       ? egal()
-      : totalEnCaisse < sommeARendre
+      : totalEnCaisse(cid) < sommeARendre
         ? pasAssez()
-        : valors.find(valor => cashInDrawer.find(cidValor => valor[0] === cidValor[0] && valor[1] <= sommeARendre && cidValor[1] > 0))
+        : rendre()
+  }
+
+  function renderPossible() {
+    const valide = totalEnCaisse(cashInDrawer.filter(valor => valors.filter(cidValor => cidValor[0] === valor[0] && valor[1] <= sommeARendre)))
+    return valide < sommeARendre || false
   }
 
   function rendre() {
-    choisir()
+    console.log('inRendre')
   }
 
-  rendre()
+  choisir()
 
-  // const rendre = () => {
-  //   console.log(`on va rendre ${sommeARendre}`)
-  //   const choix = choisir()
-  //   let rendu = 0
-  //   // console.log('rendre => choisir => ', choisir() !== undefined ? 'oui' : pasAssez())
-  //   const [devise, monnaie] = choisir()
-  //   let [, stock] = cid.find(val => val[0] === devise)
-  //   const index = cid.findIndex(element => element[0] === devise)
-  //   // console.log('rendre -> devise -> ', devise)
-  //   // console.log('rendre -> monnaie -> ', monnaie)
-  //   // console.log('rendre -> stock -> ', stock)
-  //   // console.log('rendre -> stock -> index ', index)
+  function videCaisse(valor, cidValor) {
+    console.log('inVideCaisse')
+  }
 
-  //   while (sommeARendre > 0 && stock > 0 && sommeARendre >= monnaie) {
-  //     sommeARendre -= monnaie
-  //     stock -= monnaie
-  //     rendu += monnaie
-  //     cid[index][1] -= monnaie
-  //     sommeARendre = sommeARendre.toFixed(2)
-  //   }
-
-  //   reponse.status = 'OPEN'
-  //   reponse.change.push([devise, rendu])
-  //   // console.log(`
-  //   //     on va rendre ${sommeARendre}
-  //   //     et on vient de rendre ${rendu}`)
-
-  //   if (sommeARendre > 0) {
-  //     rendre()
-  //   }
-  // }
-
-  function pasAssez () {
+  function pasAssez() {
     reponse.status = 'INSUFFICIENT_FUNDS'
     reponse.change = []
     return reponse
   }
 
-  function egal () {
+  function egal() {
     reponse.status = 'CLOSED'
     reponse.change.push(...cid.reverse())
     return reponse
@@ -89,17 +66,17 @@ function checkCashRegister(price, cash, cid) {
 }
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
-checkCashRegister(19.5, 20, [
-  ['PENNY', 1.01],
-  ['NICKEL', 2.05],
-  ['DIME', 3.1],
-  ['QUARTER', 4.25],
-  ['ONE', 90],
-  ['FIVE', 55],
-  ['TEN', 20],
-  ['TWENTY', 60],
-  ['ONE HUNDRED', 100]
-])
+// checkCashRegister(19.5, 20, [
+//   ['PENNY', 1.01],
+//   ['NICKEL', 2.05],
+//   ['DIME', 3.1],
+//   ['QUARTER', 4.25],
+//   ['ONE', 90],
+//   ['FIVE', 55],
+//   ['TEN', 20],
+//   ['TWENTY', 60],
+//   ['ONE HUNDRED', 100]
+// ])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 // checkCashRegister(3.26, 100, [
@@ -115,13 +92,13 @@ checkCashRegister(19.5, 20, [
 // ])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
-checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
+// checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 1], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
-checkCashRegister(19.5, 20, [['PENNY', 0.5], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
+// checkCashRegister(19.5, 20, [['PENNY', 0.5], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
 
 // NSTRUCTIONS :
 
