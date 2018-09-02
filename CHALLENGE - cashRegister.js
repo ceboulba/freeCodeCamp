@@ -22,11 +22,9 @@ function checkCashRegister(price, cash, cid) {
 
   // calcul de la somme a rendre de base  //
   let sommeARendre = cash - price
-  //console.log('TCL: checkCashRegister -> sommeARendre', sommeARendre);
 
   // totalEnCaisse
   const totalEnCaisse = cid.reduce((acc, curr) => acc + curr[1], 0)
-  //console.log('TCL: checkCashRegister -> totalEnCaisse', totalEnCaisse);
 
   const choisir = () => {
     return totalEnCaisse === sommeARendre
@@ -35,8 +33,6 @@ function checkCashRegister(price, cash, cid) {
         ? pasAssez()
         : valors.find(valor => cashInDrawer.find(cidValor => valor[0] === cidValor[0] && valor[1] <= sommeARendre && cidValor[1] > 0))
   }
-
-  //console.log('choix => ', choisir())
 
   function rendre() {
     choisir()
@@ -76,25 +72,6 @@ function checkCashRegister(price, cash, cid) {
   //   }
   // }
 
-  // calcul si la somme total en caisse est suffisante //
-  // function checkMyTotal() {
-  //   const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2)
-  //   console.log('totalEnCaisse -> ', totalEnCaisse)
-  //   console.log('sommeARendre -> ', sommeARendre)
-  //   return totalEnCaisse >= sommeARendre
-  //     ? rendre()
-  //     : pasAssez()
-  // }
-
-  // function checkMyTotal () {
-  //   const totalEnCaisse = cid.reduce((acc, val) => acc + val[1], 0).toFixed(2)
-  //   console.log('totalEnCaisse -> ', totalEnCaisse)
-  //   console.log('sommeARendre -> ', sommeARendre)
-  //   return totalEnCaisse > sommeARendre
-  //     ? rendre()
-  //     : pasAssez()
-  // }
-
   function pasAssez () {
     reponse.status = 'INSUFFICIENT_FUNDS'
     reponse.change = []
@@ -106,21 +83,6 @@ function checkCashRegister(price, cash, cid) {
     reponse.change.push(...cid.reverse())
     return reponse
   }
-
-  // function checkCid () {
-  //   const essais = (a, b) => {
-  //     return a[0] === b[0] && b[1] > 0 && a[1] <= sommeARendre
-  //   }
-  //   let arr = []
-  //   valors.forEach(valor => cid.forEach(element => {
-  //     if (essais(valor, element)) {
-  //       return arr.push(element)
-  //     }
-  //   }))
-  //   return arr
-  // }
-
-  //checkMyTotal()
 
   console.log('​checkCashRegister -> reponse -> ', reponse)
   return reponse
