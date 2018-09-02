@@ -36,8 +36,10 @@ function checkCashRegister(price, cash, cid) {
 
   function renderPossible() {
     const valide = totalEnCaisse(cashInDrawer.filter(valor => valors.filter(cidValor => cidValor[0] === valor[0] && valor[1] <= sommeARendre)))
-    return valide < sommeARendre || false
+   return valide > sommeARendre
+   ? true : false
   }
+  console.log('renderPossible => ', renderPossible())
 
   function rendre() {
     console.log('inRendre')
@@ -79,23 +81,23 @@ function checkCashRegister(price, cash, cid) {
 // ])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
-// checkCashRegister(3.26, 100, [
-//   ['PENNY', 1.01],
-//   ['NICKEL', 2.05],
-//   ['DIME', 3.1],
-//   ['QUARTER', 4.25],
-//   ['ONE', 90],
-//   ['FIVE', 55],
-//   ['TEN', 20],
-//   ['TWENTY', 60],
-//   ['ONE HUNDRED', 100]
-// ])
+checkCashRegister(3.26, 100, [
+  ['PENNY', 1.01],
+  ['NICKEL', 2.05],
+  ['DIME', 3.1],
+  ['QUARTER', 4.25],
+  ['ONE', 90],
+  ['FIVE', 55],
+  ['TEN', 20],
+  ['TWENTY', 60],
+  ['ONE HUNDRED', 100]
+])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 // checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
-checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 1], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
+// checkCashRegister(19.5, 20, [['PENNY', 0.01], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 1], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
 
 // ///////////////////  APPEL DE L'APP  /////////////////////
 // checkCashRegister(19.5, 20, [['PENNY', 0.5], ['NICKEL', 0], ['DIME', 0], ['QUARTER', 0], ['ONE', 0], ['FIVE', 0], ['TEN', 0], ['TWENTY', 0], ['ONE HUNDRED', 0]])
