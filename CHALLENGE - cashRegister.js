@@ -51,12 +51,8 @@ function checkCashRegister (price, cash, cid) {
 
   function rendre () {
     let rendu = 0
-    // const validValor = valors.find(valor => valor[1] <= sommeARendre)
     const validValor = valors.find(valor => cid.find(cidValor => cidValor[0] === valor[0] && valor[1] <= sommeARendre && cidValor[1] > 0))
-    const index = cid.reverse().findIndex(val => val[0] === validValor[0])
-    // console.log('validValor => ', validValor)
-    // console.log('index => ', index)
-    // console.log('sommeARendre => ', sommeARendre)
+    const index = cid.reverse().findIndex(val => val[0] === validValor[0])  
 
     while (sommeARendre > 0 && cid[index][1] > 0 && sommeARendre >= validValor[1]) {
       sommeARendre -= validValor[1]
