@@ -19,7 +19,6 @@
   "homepage": "https://github.com/ceboulba/freeCodeCamp#readme",
   "devDependencies": {
     "eslint": "^5.4.0",
-    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
