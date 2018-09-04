@@ -1,8 +1,6 @@
-function orbitalPeriod (arr) {
+function orbitalPeriod(arr) {
   var GM = 398600.4418
   var earthRadius = 6367.4447
-
-
 
   function calculate(GM, earthRadius, avgAlt, name) {
     this.GM = Math.floor(GM)
@@ -10,9 +8,12 @@ function orbitalPeriod (arr) {
     this.avgAlt = Math.floor(avgAlt)
     this.name = name
 
-    const orbit = 
+    const orbit = (GM, earthRadius, avgAlt, name) => {
+      return GM
+    }
+    console.log(orbit())
   }
-
+  
   return arr
 }
 
