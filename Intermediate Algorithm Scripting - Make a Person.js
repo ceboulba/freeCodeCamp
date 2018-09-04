@@ -1,41 +1,26 @@
-var Person = function(firstAndLast) {
-  // Complete the method below and implement the others similarly  
-  this.setFullName = (firstAndLast) => {
-    this.fullName = firstAndLast
-  }
+var Person = function (firstAndLast) {
 
-  this.getFullName = function () {
-    return this.fullName
-  }
+  let fullName = firstAndLast
 
-  this.getFirstName = function (first) {
-    return first
-  }
+  this.getFirstName = () => fullName.split(' ')[0]
+  this.getLastName = () => fullName.split(' ')[1]
+  this.getFullName = () => fullName
 
   this.setFirstName = (first) => {
-    this.first = first
+    fullName = `${first} ${fullName.split(' ')[1]}`
   }
 
-  this.getLastName = function() {
-    return this.fullName
+  this.setLastName = (last) => {
+    fullName = `${fullName.split(' ')[0]} ${last}`
   }
 
-  this.setLastName = (firstAndLast) => {
-    this.fullName = firstAndLast
-  }
+  this.setFullName = (name) => { fullName = name }
 }
 
-var bob = new Person('Bob Ross');
-console.log(bob.getFullName());
+var bob = new Person('Bob Ross')
 
-console.log(Object.keys(bob).length)
 console.log(bob.getFirstName())
-
-/*
-getFirstName()
-getLastName()
-getFullName()
-setFirstName(first)
-setLastName(last)
-setFullName(firstAndLast)
-*/
+console.log(bob.getLastName())
+console.log(bob.getFullName())
+bob.setFirstName('Haskell')
+console.log('get First', bob.getFirstName())
