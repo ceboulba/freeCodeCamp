@@ -9,12 +9,12 @@ function orbitalPeriod (arr) {
     const data = calcul(GM, earthRadius, avgAlt)
     reponse.push({name: name, orbitalPeriod: data})
   })
-  
+
   function calcul (GM, earthRadius, avgAlt) {
     const result = Math.round(2 * Math.PI * Math.sqrt((Math.pow((earthRadius + avgAlt), 3)) / GM))
     return result
   };
-  
+
   console.log('reponse => ', reponse)
   return reponse
 }
