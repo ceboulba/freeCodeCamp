@@ -6,19 +6,16 @@ function orbitalPeriod (arr) {
 
   arr.map(elem => {
     const {name, avgAlt} = elem
-    console.log('elem => ', name)
     const data = calcul(GM, earthRadius, avgAlt)
-    console.log('data => ', data)
     reponse.push({name: name, orbitalPeriod: data})
   })
-
+  
   function calcul (GM, earthRadius, avgAlt) {
     const result = Math.round(2 * Math.PI * Math.sqrt((Math.pow((earthRadius + avgAlt), 3)) / GM))
     return result
   };
-
+  
   console.log('reponse => ', reponse)
-
   return reponse
 }
 
