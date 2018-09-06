@@ -1,7 +1,7 @@
 function frankenSplice (arr1, arr2, n) {
-  // It's alive. It's alive!  
+  // It's alive. It's alive!
   arr2.splice(n, 0, ...arr1)
-  //arr2.join().split(',')
+  // arr2.join().split(',')
   console.log('arr2', arr2)
 
   // return arr2;
